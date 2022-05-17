@@ -5,13 +5,17 @@
   "license": "ISC",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "build": "tsc -b"
   },
   "keywords": [],
   "author": "",
   "types": "./dist/types/index.d.ts",
   "devDependencies": {
+    "@types/jest": "^27.5.1",
+    "jest": "^28.1.0",
+    "ts-jest": "^28.0.2",
     "typescript": "^4.6.4"
   },
   "dependencies": {
