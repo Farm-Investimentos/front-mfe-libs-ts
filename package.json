@@ -1,6 +1,6 @@
 {
 	"name": "@farm-investimentos/front-mfe-libs-ts",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
@@ -11,8 +11,7 @@
 		"test:watch": "jest --watch",
 		"build": "tsc -b",
 		"lint": "eslint",
-		"lint:fix": "eslint --fix",
-		"postinstall": "husky install"
+		"lint:fix": "eslint --fix"
 	},
 	"keywords": [],
 	"types": "./dist/types/index.d.ts",
@@ -36,9 +35,9 @@
 		"dist": "dist"
 	},
 	"repository": {
-        "type": "git",
-        "url": "git://github.com/Farm-Investimentos/front-mfe-libs-ts.git"
-    },
+		"type": "git",
+		"url": "git://github.com/Farm-Investimentos/front-mfe-libs-ts.git"
+	},
 	"publishConfig": {
 		"@farm-investimentos:registry": "https://registry.npmjs.org"
 	}
