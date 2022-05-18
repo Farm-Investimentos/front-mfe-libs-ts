@@ -1,9 +1,11 @@
 {
-	"name": "typescript-utils",
-	"version": "1.0.0",
+	"name": "@farm-investimentos/front-mfe-libs-ts",
+	"version": "0.0.1",
+	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
 	"main": "./dist/index.js",
+	"private": false,
 	"scripts": {
 		"test": "jest",
 		"test:watch": "jest --watch",
@@ -13,7 +15,6 @@
 		"postinstall": "husky install"
 	},
 	"keywords": [],
-	"author": "",
 	"types": "./dist/types/index.d.ts",
 	"devDependencies": {
 		"@types/jest": "^27.5.1",
@@ -26,5 +27,14 @@
 	},
 	"dependencies": {
 		"@types/node": "^17.0.33"
+	},
+	"files": [
+		"**/*"
+	],
+	"directories": {
+		"dist": "dist"
+	},
+	"publishConfig": {
+		"@farm-investimentos:registry": "https://registry.npmjs.org"
 	}
 }
