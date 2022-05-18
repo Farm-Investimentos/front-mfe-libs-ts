@@ -35,6 +35,10 @@
 	"directories": {
 		"dist": "dist"
 	},
+	"repository": {
+        "type": "git",
+        "url": "git://github.com/Farm-Investimentos/front-mfe-libs-ts.git"
+    },
 	"publishConfig": {
 		"@farm-investimentos:registry": "https://registry.npmjs.org"
 	}
