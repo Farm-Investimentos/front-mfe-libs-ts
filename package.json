@@ -1,6 +1,6 @@
 {
 	"name": "@farm-investimentos/front-mfe-libs-ts",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
@@ -14,7 +14,7 @@
 		"lint:fix": "eslint --fix"
 	},
 	"keywords": [],
-	"types": "./dist/index.d.ts",
+	"types": "./dist/types/index.d.ts",
 	"devDependencies": {
 		"@types/jest": "^27.5.1",
 		"eslint": "^8.15.0",
