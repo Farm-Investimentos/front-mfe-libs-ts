@@ -7,4 +7,6 @@ export interface IPageableAPIResponse<T> extends IAPIResponse<T> {
 	numberOfElements: number;
 	totalElements: number;
 	totalPages: number;
+	page: number;
+	size: number;
 }
