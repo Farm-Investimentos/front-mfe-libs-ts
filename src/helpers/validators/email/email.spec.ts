@@ -1,4 +1,4 @@
-import { email } from '.';
+import email from '.';
 
 describe('email', () => {
 	it('Should validate email', () => {

@@ -1,4 +1,4 @@
-import { cpfOrCnpj } from '.';
+import cpfOrCnpj from '.';
 
 describe('CPF or CNPJ', () => {
 	it('should check valid cpf', () => {

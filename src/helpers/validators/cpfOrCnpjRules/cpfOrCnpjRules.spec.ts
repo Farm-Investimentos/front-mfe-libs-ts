@@ -1,4 +1,4 @@
-import { cpfOrCnpjRules } from '.';
+import cpfOrCnpjRules from '.';
 
 describe('CPF or CNPJ valid', () => {
 	it('Should validate CNPJ', () => {

@@ -1,4 +1,4 @@
-import { isValidCNPJ } from '.';
+import isValidCNPJ from '.';
 
 describe('Is Valid CNPJ', () => {
 	it('Should validate CNPJ', () => {
