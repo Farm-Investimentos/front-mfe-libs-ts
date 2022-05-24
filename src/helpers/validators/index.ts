@@ -1,4 +1,4 @@
-import cpfOrCnpjRules from './cpfOrCnpjRules';
+import cpfOrCnpjRules from './cpfOrCnpjRules/cpfOrCnpjRules';
 import email from './email';
 import cpfOrCnpj from './cpfOrCnpj';
 import isValidCNPJ from './isValidCNPJ';
