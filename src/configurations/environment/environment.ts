@@ -1,6 +1,7 @@
 import ICognitoConfig from 'interfaces/ICognitoConfig';
 
-const FARM = window['FARM'] || {};
+const _window: any = window;
+const FARM = _window['FARM'] || {};
 
 FARM.APIS = FARM.APIS || {};
 
@@ -28,7 +29,7 @@ export default {
 	},
 	get apiOperacoesUrl(): string {
 		return FARM.APIS.operacoes;
-},
+	},
 	get apiCreditoUrl(): string {
 		return FARM.APIS.credito;
 	},
