@@ -39,6 +39,9 @@ export default {
 	get apiOperacoesNotasUrl(): string {
 		return FARM.APIS.notas;
 	},
+	get apiNewCreditUrl(): string {
+		return FARM.APIS.newCredit;
+	},
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
