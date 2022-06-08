@@ -4,7 +4,7 @@
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
-	"main": "./dist/index.js",
+	"main": "./index.js",
 	"private": false,
 	"scripts": {
 		"test": "jest",
@@ -14,7 +14,7 @@
 		"lint:fix": "eslint --fix"
 	},
 	"keywords": [],
-	"types": "./dist/types/index.d.ts",
+	"types": "./types/index.d.ts",
 	"devDependencies": {
 		"@types/jest": "^27.5.1",
 		"eslint": "^8.15.0",
