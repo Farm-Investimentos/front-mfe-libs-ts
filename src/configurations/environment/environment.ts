@@ -42,6 +42,9 @@ export default {
 	get apiNewCreditUrl(): string {
 		return FARM.APIS.newCredit;
 	},
+	get apiSegurancaUrl(): string {
+		return FARM.APIS.seguranca;
+	},
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
