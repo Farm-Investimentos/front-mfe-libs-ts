@@ -1,0 +1,1 @@
+export { sizeOf } from './sizeFile';
