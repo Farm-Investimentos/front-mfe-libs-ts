@@ -11,11 +11,13 @@ export default (url: string): Promise<unknown> => {
 	window.open(href, '_blank');
 
 	return new Promise((resolve) => {
+
 		resolve({
 			data: {
 				content: 'Download do arquivo foi iniciado na aba aberta',
 				status: 200,
 			},
 		});
+
 	});
 };
