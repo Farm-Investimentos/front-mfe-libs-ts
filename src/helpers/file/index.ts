@@ -1,3 +1,3 @@
 import downloadFileHandler from './downloadFileHandler';
 
-export { downloadFileHandler };
+export default downloadFileHandler;
