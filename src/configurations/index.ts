@@ -1,2 +1,4 @@
+import environment from './environment';
+
 export * from './contextMenuOptions';
-export * from './environment';
+export { environment };
