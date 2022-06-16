@@ -7,4 +7,4 @@ import queryString from './queryString';
 export {
 	file,
 	queryString
-}
+};
