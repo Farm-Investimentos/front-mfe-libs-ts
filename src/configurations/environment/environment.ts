@@ -39,12 +39,14 @@ export default {
 	get apiOperacoesNotasUrl(): string {
 		return FARM.APIS.notas;
 	},
-	get apiNewCreditUrl(): string {
-		return FARM.APIS.newCredit;
-	},
+
 	get apiSegurancaUrl(): string {
 		return FARM.APIS.seguranca;
 	},
+	get apiCreditoSolicitacaoLimiteUrl(): string {
+		return FARM.APIS.creditoSolicitacaoLimite;
+	},
+
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
