@@ -7,6 +7,7 @@ import fileSaver from './fileSaver';
 import errorBuilder from './errorBuilder';
 import installComponents from './installComponents';
 import simpleBuilder from './simpleBuilder';
+import string from './string';
 
 export {
 	file,
@@ -14,5 +15,6 @@ export {
 	fileSaver,
 	errorBuilder,
 	installComponents,
-	simpleBuilder
+	simpleBuilder,
+	string
 };
