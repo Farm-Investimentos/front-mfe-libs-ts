@@ -12,17 +12,20 @@ export default {
 	get apiConfigUrl(): string {
 		return FARM.APIS.config;
 	},
-	get apiDashboardUrl() {
+	get apiDashboardUrl(): string {
 		return FARM.APIS.dashboard;
 	},
 	get apiExcelUrl(): string {
 		return FARM.APIS.excel;
 	},
-	get apiZipCodeUrl() {
+	get apiZipCodeUrl(): string {
 		return FARM.APIS.cep;
 	},
-	get onboardingApiUrl() {
+	get onboardingApiUrl(): string {
 		return FARM.APIS.onboarding;
+	},
+	get apiCadastrosUrlV2(): string {
+		return FARM.APIS.cadastrosV2;
 	},
 	get apiCadastrosUrl(): string {
 		return FARM.APIS.cadastros;
