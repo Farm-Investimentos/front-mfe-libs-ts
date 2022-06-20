@@ -1,4 +1,4 @@
-# front-mfe-utils
+# front-mfe-libs-ts
 
 ## Project setup
 
