@@ -8,6 +8,7 @@ import errorBuilder from './errorBuilder';
 import installComponents from './installComponents';
 import simpleBuilder from './simpleBuilder';
 import string from './string';
+import toClipboard from './toClipboard';
 
 export {
 	file,
@@ -16,5 +17,6 @@ export {
 	errorBuilder,
 	installComponents,
 	simpleBuilder,
-	string
+	string,
+	toClipboard
 };
