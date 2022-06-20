@@ -9,6 +9,7 @@ import installComponents from './installComponents';
 import simpleBuilder from './simpleBuilder';
 import string from './string';
 import toClipboard from './toClipboard';
+import localStorageWrapper from './localStorageWrapper';
 
 export {
 	file,
@@ -18,5 +19,6 @@ export {
 	installComponents,
 	simpleBuilder,
 	string,
-	toClipboard
+	toClipboard,
+	localStorageWrapper
 };
