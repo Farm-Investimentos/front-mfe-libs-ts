@@ -23,7 +23,7 @@ export default (
 	const result = parser
 		? data.data.content.map((item: Object) => parser(item))
 		: data.data.content;
-	const { totalPages } = data.data || data.data.pagination;
+	const totalPages = data.data.totalPages || data.data.pageable.totalPages;
 
 	commit(`set${key}`, result);
 	commit(`set${key}TotalPages`, totalPages);
