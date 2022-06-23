@@ -1,5 +1,6 @@
 export * from './date';
 export * from './validators';
+export * from './store';
 
 import file from './file';
 import queryString from './queryString';
@@ -20,5 +21,5 @@ export {
 	simpleBuilder,
 	string,
 	toClipboard,
-	localStorageWrapper
+	localStorageWrapper,
 };
