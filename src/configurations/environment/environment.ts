@@ -46,6 +46,11 @@ export default {
 	get apiSegurancaUrl(): string {
 		return FARM.APIS.seguranca;
 	},
+
+	get apiDesembolsosUrl(): string {
+		return FARM.APIS.desembolsos;
+	},
+
 	get apiCreditoSolicitacaoLimiteUrl(): string {
 		return FARM.APIS.creditoSolicitacaoLimite;
 	},
