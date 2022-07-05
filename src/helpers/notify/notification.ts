@@ -1,4 +1,4 @@
-import { StatusEnum } from 'interfaces/IRequestStatus';
+import { StatusEnum } from '../../interfaces/IRequestStatus';
 
 /**
  * Dispatch global event to enable communcation between microfrontends

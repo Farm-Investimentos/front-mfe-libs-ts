@@ -1,5 +1,5 @@
 import notification from './notification';
-import { IRequestStatus, StatusEnum } from 'interfaces/IRequestStatus';
+import { StatusEnum } from '../../interfaces/IRequestStatus';
 /**
  * Notify success or error event, wrapping notification function
  *
