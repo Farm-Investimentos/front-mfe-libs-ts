@@ -1,6 +1,7 @@
 export * from './date';
 export * from './validators';
 export * from './store';
+export * from './notify';
 
 import file from './file';
 import queryString from './queryString';
@@ -11,6 +12,8 @@ import simpleBuilder from './simpleBuilder';
 import string from './string';
 import toClipboard from './toClipboard';
 import localStorageWrapper from './localStorageWrapper';
+import cacheClient from './cacheClient';
+import axiosWrapper from './axiosWrapper';
 
 export {
 	file,
@@ -22,4 +25,6 @@ export {
 	string,
 	toClipboard,
 	localStorageWrapper,
+	axiosWrapper,
+	cacheClient,
 };
