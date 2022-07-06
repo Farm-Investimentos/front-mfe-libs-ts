@@ -5,7 +5,7 @@
  * @param {any} filters - filters selected to add like querystring at URL
  * @param {any} mappings - especific filter update
  */
-export default (filters: any, mappings: any) =>
+export default (filters: Record<string, any>, mappings: Record<string, any>) =>
 	Object.keys(filters)
 		.filter(
 			(key) =>

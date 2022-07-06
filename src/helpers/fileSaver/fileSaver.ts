@@ -8,13 +8,14 @@
  */
 
 const fileSaver =
-	(windowWrapper: any) => (data: any, type?: any, name?: string) => {
+	(windowWrapper: Window & typeof globalThis) =>
+	(data: any, type?: string, name?: string): HTMLAnchorElement => {
 		const blob = new Blob([data], { type });
 		const link = windowWrapper.document.createElement('a');
 		link.href = windowWrapper.URL.createObjectURL
 			? windowWrapper.URL.createObjectURL(blob)
-			: null;
-		link.download = name;
+			: '';
+		link.download = name || '';
 		link.click();
 		return link;
 	};

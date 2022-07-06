@@ -3,10 +3,11 @@
  * to create an object with key/pair values based on the hoisted list
  * @module
  */
-export default (defaultKeys: any) => (rawData: any) =>
-	Object.fromEntries(
-		Object.keys(defaultKeys).map((key) => [
-			[defaultKeys[key]],
-			rawData[key],
-		]),
-	);
+export default (defaultKeys: Record<string, any>) =>
+	(rawData: Record<string, any>) =>
+		Object.fromEntries(
+			Object.keys(defaultKeys).map((key) => [
+				[defaultKeys[key]],
+				rawData[key],
+			]),
+		);

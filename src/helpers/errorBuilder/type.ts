@@ -1,7 +1,6 @@
 export type ErrorType = {
-	type: string,
-	code: string,
-	message: string,
-	httpStatus: any,
-
+	type: string;
+	code: string;
+	message: string;
+	httpStatus: string;
 };
