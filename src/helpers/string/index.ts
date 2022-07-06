@@ -1,3 +1,3 @@
 import capitalize from './capitalize';
 
-export default capitalize;
+export { capitalize };

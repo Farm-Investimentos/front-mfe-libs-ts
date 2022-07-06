@@ -1,3 +1,5 @@
+import { LocalStorageWrapperReturn } from './type';
+
 /**
  * Wrapper for the browser localStorage, leveraing its features
  * and enhancing them (such as JSON parse/stringify for stored values)
@@ -5,9 +7,9 @@
  * @param {storage} - a storage object that implements same interface from local storage
  * @returns {Object} - an storage object
  */
-const localStorageWrapper = (storage: any) => {
-	function getItem(key: string | any, defaultValue: string | any) {
-		const item = storage.getItem(key) || defaultValue;
+const localStorageWrapper = (storage: Storage): LocalStorageWrapperReturn => {
+	function getItem(key: string, defaultValue?: string): any {
+		const item = storage.getItem(key) || defaultValue || '';
 
 		try {
 			return JSON.parse(item);
@@ -16,7 +18,7 @@ const localStorageWrapper = (storage: any) => {
 		}
 	}
 
-	function setItem(key: string | any, value: string | any) {
+	function setItem(key: string, value: string): boolean {
 		try {
 			if (typeof value === 'string') {
 				storage.setItem(key, value);
@@ -29,11 +31,11 @@ const localStorageWrapper = (storage: any) => {
 		}
 	}
 
-	function clearKey(key: string | any) {
+	function clearKey(key: string): void {
 		return storage.removeItem(key);
 	}
 
-	function clear() {
+	function clear(): void {
 		return storage.clear();
 	}
 

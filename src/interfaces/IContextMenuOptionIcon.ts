@@ -1,4 +1,4 @@
-export type IContextMenuOptionIcon = {
+export interface IContextMenuOptionIcon {
 	color?: string;
 	type: string;
-};
+}
