@@ -1,6 +1,6 @@
 {
 	"name": "@farm-investimentos/front-mfe-libs-ts",
-	"version": "0.7.2",
+	"version": "0.8.0",
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
@@ -17,6 +17,7 @@
 	"types": "./types/index.d.ts",
 	"devDependencies": {
 		"@types/jest": "^27.5.1",
+		"axios": "^0.27.2",
 		"eslint": "^8.15.0",
 		"eslint-config-airbnb": "^19.0.4",
 		"husky": "^8.0.1",

@@ -5,7 +5,7 @@
  * @param {components} - components's list
  */
 
-export default (Vue: any, components: any) => {
+export default (Vue: any, components: Record<string, any>): void => {
 	Object.keys(components).forEach((key) => {
 		const component = components[key];
 		if (component.extendOptions && component.extendOptions.name) {

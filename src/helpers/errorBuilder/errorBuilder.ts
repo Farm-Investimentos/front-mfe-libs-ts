@@ -6,10 +6,10 @@
  * @return {Object} error parsed and ready to be used in the views/components
  */
 
-import { ErrorType } from "./type";
+import { ErrorType } from './type';
 
-export default (error: any): any => {
-	const err = <any> {};
+export default (error: Record<string, any>) => {
+	const err: Record<string, any> = {};
 
 	if (error.code === 'ECONNABORTED') {
 		err.message = 'timeout';
@@ -33,7 +33,7 @@ export default (error: any): any => {
 			}
 			if (data.errors && data.errors.length > 1) {
 				err.message = data.errors
-					.map((item: any) => {
+					.map((item: Record<string, any>) => {
 						if (!item) return 'Erro inesperado';
 
 						if (item.defaultMessage) return item.defaultMessage;
@@ -48,7 +48,7 @@ export default (error: any): any => {
 		err.message = err.message.message;
 	}
 
-	const errorBuilder: ErrorType = err;
+	const errorBuilder: ErrorType = err as ErrorType;
 
 	return errorBuilder;
 };

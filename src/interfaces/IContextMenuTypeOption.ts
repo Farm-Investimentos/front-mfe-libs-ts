@@ -1,7 +1,7 @@
 import { IContextMenuOptionIcon } from './IContextMenuOptionIcon';
 
-export type IContextMenuOption = {
+export interface IContextMenuOption {
 	label: string;
 	handler: string;
 	icon: IContextMenuOptionIcon;
-};
+}
