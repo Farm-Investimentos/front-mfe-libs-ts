@@ -10,4 +10,4 @@ const gtagMixins = (origin: string) => ({
 	},
 });
 
-export { gtagMixins };
+export default gtagMixins;
