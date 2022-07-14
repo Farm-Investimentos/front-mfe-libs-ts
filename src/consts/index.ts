@@ -1,3 +1,4 @@
 import vuetify from './vuetify';
+import RequestStatusEnum from './RequestStatusEnum';
 
-export { vuetify };
+export { vuetify, RequestStatusEnum };

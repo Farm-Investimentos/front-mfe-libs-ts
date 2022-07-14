@@ -6,10 +6,13 @@
  * @return {Object} error parsed and ready to be used in the views/components
  */
 
+import { IRequestStatus } from 'interfaces';
 import { ErrorType } from './type';
 
 export default (error: Record<string, any>) => {
-	const err: Record<string, any> = {};
+	const err: Record<string, any> | IRequestStatus = {
+		type: 'ERROR',
+	};
 
 	if (error.code === 'ECONNABORTED') {
 		err.message = 'timeout';
