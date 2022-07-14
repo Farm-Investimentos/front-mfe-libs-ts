@@ -53,7 +53,6 @@ export default (httpClient: any, notification: Function, baseURL: string) => {
 		);
 
 		instancia.interceptors.response.use(fullfilledResponse, errorResponse);
-		console.log('instancia', instancia);
 		return instancia;
 	};
 
