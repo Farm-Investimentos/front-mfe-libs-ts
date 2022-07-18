@@ -8,10 +8,10 @@ import { StatusEnum } from '../../interfaces/IRequestStatus';
  * @param {message} - message to br broadcasted
  */
 export default (
-	type: StatusEnum,
-	message: string,
+	type: StatusEnum | string,
+	message?: string,
 ): CustomEvent<{
-	message: string;
+	message?: string;
 }> => {
 	const customEvent = new CustomEvent(type, {
 		detail: {
