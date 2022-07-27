@@ -7,11 +7,16 @@ import { StatusEnum } from '../../interfaces/IRequestStatus';
  * @param {type} - type of the event (ERROR/SUCCESS/START)
  * @param {message} - message to br broadcasted
  */
+type NotificationCustomMessage = {
+	title: string;
+	message: string;
+};
+
 export default (
 	type: StatusEnum | string,
-	message?: string,
+	message?: NotificationCustomMessage | string,
 ): CustomEvent<{
-	message?: string;
+	message?: NotificationCustomMessage | string;
 }> => {
 	const customEvent = new CustomEvent(type, {
 		detail: {
