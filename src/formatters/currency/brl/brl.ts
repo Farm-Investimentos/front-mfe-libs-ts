@@ -5,12 +5,12 @@ export default (
 	if (valor !== 0 && !valor) {
 		return null;
 	}
-	return valor
-		.toLocaleString('pt-BR', {
-			style: 'currency',
-			currency: 'BRL',
-			minimumFractionDigits: maximumFractionDigits,
-			maximumFractionDigits,
-		})
+	return new Intl.NumberFormat('pt-BR', {
+		style: 'currency',
+		currency: 'BRL',
+		minimumFractionDigits: maximumFractionDigits,
+		maximumFractionDigits,
+	})
+		.format(valor)
 		.replace(/\s/g, '');
 };
