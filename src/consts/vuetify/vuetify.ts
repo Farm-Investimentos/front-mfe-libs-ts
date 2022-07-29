@@ -14,6 +14,7 @@ export default {
 					darken2: '#0AFFD2',
 					darken3: '#00F5C8',
 					darken4: '#00CCA7',
+					darken5: '#006653'
 				},
 				error: '#EA5455',
 				extra: {
@@ -23,6 +24,11 @@ export default {
 					lighten3: '#0B1A1B',
 					lighten4: '#FADD9E',
 					lighten5: '#F8CC6B',
+					darken1: '#595959',
+					darken2: '#4d4d4d',
+					darken3: '#404040',
+					darken4: '#333333',
+					darken5: '#262626',
 				},
 				gray: {
 					base: '#5C5C5C',
@@ -31,10 +37,13 @@ export default {
 					lighten3: '#0B1A1B',
 					lighten4: '#F5F5F5',
 					lighten5: '#FFFFFF',
+					darken1: '#595959',
+					darken2: '#4d4d4d',
+					darken3: '#404040',
+					darken4: '#333333',
+					darken5: '#262626',
 				},
-				accent: {
-					base: '#5089DE',
-				},
+				accent: '#5089DE',
 				yellow: '#F8CC6B',
 			},
 		},
