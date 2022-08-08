@@ -55,6 +55,10 @@ export default {
 		return FARM.APIS.creditoSolicitacaoLimite;
 	},
 
+	get apiCreditoGestaoLimiteUrl(): string {
+		return FARM.APIS.creditoGestaoLimite;
+	},
+
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
