@@ -41,3 +41,9 @@ export const approve: IContextMenuOption = {
 	handler: 'approve',
 	icon: { color: 'secondary', type: 'check-circle' },
 };
+
+export const inAnalysis: IContextMenuOption  = {
+	label: 'Em Análise',
+	handler: 'onInAnalysis',
+	icon: { color: 'secondary', type: 'magnify' },
+};
