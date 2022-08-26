@@ -6,5 +6,4 @@ export {
 	historic,
 	download,
 	approve,
-	inAnalysis,
 } from './contextMenuOptions';
