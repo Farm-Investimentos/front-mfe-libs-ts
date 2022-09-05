@@ -27,6 +27,9 @@ export default {
 	get apiCadastrosUrlV2(): string {
 		return FARM.APIS.cadastrosV2;
 	},
+	get apiCadastrosUrlV3(): string {
+		return FARM.APIS.cadastrosV3;
+	},
 	get apiCadastrosUrl(): string {
 		return FARM.APIS.cadastros;
 	},
