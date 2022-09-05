@@ -9,7 +9,7 @@ export const details: IContextMenuOption = {
 export const edit: IContextMenuOption = {
 	label: 'Editar',
 	handler: 'edit',
-	icon: { color: 'secondary', type: 'square-edit-outline' },
+	icon: { color: 'secondary', type: 'pencil-outline' },
 };
 
 export const invite: IContextMenuOption = {
@@ -27,7 +27,7 @@ export const historic: IContextMenuOption = {
 export const remove: IContextMenuOption = {
 	label: 'Excluir',
 	handler: 'remove',
-	icon: { color: 'error', type: 'trash-can' },
+	icon: { color: 'error', type: 'delete-outline' },
 };
 
 export const download: IContextMenuOption = {
