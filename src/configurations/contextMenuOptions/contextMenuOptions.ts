@@ -3,25 +3,25 @@ import { IContextMenuOption } from '../../interfaces/IContextMenuTypeOption';
 export const details: IContextMenuOption = {
 	label: 'Ver',
 	handler: 'details',
-	icon: { color: 'secondary', type: 'open-in-new' },
+	icon: { type: 'open-in-new' },
 };
 
 export const edit: IContextMenuOption = {
 	label: 'Editar',
 	handler: 'edit',
-	icon: { color: 'secondary', type: 'pencil-outline' },
+	icon: { type: 'pencil-outline' },
 };
 
 export const invite: IContextMenuOption = {
 	label: 'Convidar',
 	handler: 'invite',
-	icon: { color: 'secondary', type: 'email' },
+	icon: { type: 'email' },
 };
 
 export const historic: IContextMenuOption = {
 	label: 'Histórico',
 	handler: 'historic',
-	icon: { color: 'grey', type: 'history' },
+	icon: { color: 'gray', type: 'history' },
 };
 
 export const remove: IContextMenuOption = {
@@ -33,11 +33,11 @@ export const remove: IContextMenuOption = {
 export const download: IContextMenuOption = {
 	label: 'Baixar Documento',
 	handler: 'download',
-	icon: { color: 'secondary', type: 'download' },
+	icon: { type: 'download' },
 };
 
 export const approve: IContextMenuOption = {
 	label: 'Analisar Documento',
 	handler: 'approve',
-	icon: { color: 'secondary', type: 'check-circle' },
+	icon: { type: 'check-circle' },
 };
