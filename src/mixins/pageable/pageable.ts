@@ -21,7 +21,8 @@ const pageable = {
 			(this as any).doSearch();
 		},
 		searchListener(data: any) {
-			const value = (this as any).filters[(this as any).filterInputKey] || '';
+			const value =
+				(this as any).filters[(this as any).filterInputKey] || '';
 			(this as any).filters = {
 				...data,
 				limit: (this as any).lastSearchFilters.limit,
@@ -32,8 +33,9 @@ const pageable = {
 		},
 		filterInputChanged(value: string) {
 			(this as any).filters[(this as any).filterInputKey] = value;
-			if (value.length >= 3 || value === '') {
-				this.redoSearchFirstPage();
+			const disableFilterInpuChangeMinLength = (this as any).disableFilterInpuChangeMinLength;
+			if(value === '' || disableFilterInpuChangeMinLength || value.length >= 3) {
+				(this as any).redoSearchFirstPage();
 			}
 		},
 		enableSearch() {
@@ -73,8 +75,12 @@ const pageable = {
 				};
 
 				if ((this as any).hasSort) {
-					(this as any).hasSort.orderby = (this as any).$route.query.orderby;
-					(this as any).hasSort.order = (this as any).$route.query.order;
+					(this as any).hasSort.orderby = (
+						this as any
+					).$route.query.orderby;
+					(this as any).hasSort.order = (
+						this as any
+					).$route.query.order;
 				}
 
 				return true;
@@ -98,7 +104,10 @@ const pageable = {
 				obj.order = (this as any).hasSort.order;
 			}
 
-			if (JSON.stringify(obj) !== JSON.stringify((this as any).$route.query)) {
+			if (
+				JSON.stringify(obj) !==
+				JSON.stringify((this as any).$route.query)
+			) {
 				(this as any).$router.replace({
 					path: (this as any).$route.path,
 					query: { path: (this as any).$route.query.path, ...obj },
