@@ -13,7 +13,7 @@ export default (Vue: any, components: Record<string, any>): void => {
 		if (component.extendOptions && component.extendOptions.name) {
 			Vue.component(component.extendOptions.name, component);
 		}
-		if (component.name.indexOf('farm-') === 0) {
+		if (component?.name?.indexOf('farm-') === 0) {
 			Vue.component(component.name, component);
 		}
 		if (!htmlTags.includes(key.toLowerCase()))
