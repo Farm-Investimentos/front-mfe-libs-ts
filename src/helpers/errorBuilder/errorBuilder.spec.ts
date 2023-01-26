@@ -53,4 +53,28 @@ describe('ErrorBuilder', () => {
 		});
 		expect(r.message).toEqual('some error. some error');
 	});
+
+	it('Should return error for single array', () => {
+		const r = errorBuilder({
+			response: {
+				status: 401,
+				data: {
+					errors: ['some error'],
+				},
+			},
+		});
+		expect(r.message).toEqual('some error');
+	});
+
+	it('Should remove html markup', () => {
+		const r = errorBuilder({
+			response: {
+				status: 401,
+				data: {
+					errors: ['some error <strong>with html</strong>'],
+				},
+			},
+		});
+		expect(r.message).toEqual('some error with html');
+	});
 });

@@ -51,6 +51,10 @@ export default (error: Record<string, any>) => {
 		err.message = err.message.message;
 	}
 
+	if (err.message) {
+		err.message = err.message.replace(/<[^>]*>/g, '');
+	}
+
 	const errorBuilder: ErrorType = err as ErrorType;
 
 	return errorBuilder;
