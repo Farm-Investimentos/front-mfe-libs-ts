@@ -41,3 +41,15 @@ export const approve: IContextMenuOption = {
 	handler: 'approve',
 	icon: { type: 'check-circle' },
 };
+
+export const finalizeAssociation: IContextMenuOption = {
+	label: 'Finalizar Associação',
+	handler: 'finalizeAssociation',
+	icon: { color: 'error', type: 'close-circle-outline' },
+};
+
+export const reAssociate: IContextMenuOption = {
+	label: 'Associar Novamente',
+	handler: 'reAssociate',
+	icon: { type: 'reload' },
+};
