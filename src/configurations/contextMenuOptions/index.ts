@@ -6,4 +6,6 @@ export {
 	historic,
 	download,
 	approve,
+	finalizeAssociation,
+	reAssociate,
 } from './contextMenuOptions';
