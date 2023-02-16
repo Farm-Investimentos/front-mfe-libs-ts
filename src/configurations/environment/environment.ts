@@ -62,6 +62,10 @@ export default {
 		return FARM.APIS.creditoGestaoLimite;
 	},
 
+	get apiAgentesCobranca(): string {
+		return FARM.APIS.agentesCobranca;
+	},
+
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
