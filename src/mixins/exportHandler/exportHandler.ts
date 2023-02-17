@@ -1,17 +1,20 @@
 const exportHandler = {
 	methods: {
 		async exportHandler(callback: Function) {
-			const dialogInstance = await (this as any).$dialog.info({
-				text: 'O download do arquivo será iniciado em uma nova aba. Para continuar usando a plataforma, você terá que retornar manualmente.',
-				title: 'Download',
-				icon: false,
-				actions: {},
-				waitForResult: false,
+
+			const customEvent = new CustomEvent('SUCCESS', {
+				detail: {
+					message: {
+						message: 'O download do arquivo iniciará em uma nova aba.',
+						title: 'Aviso',
+					},
+				},
 			});
+			window.dispatchEvent(customEvent);
+
 			setTimeout(() => {
-				dialogInstance.close();
 				callback();
-			}, 2000);
+			}, 2900);
 		},
 	},
 };
