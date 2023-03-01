@@ -51,6 +51,10 @@ export default (error: Record<string, any>) => {
 		err.message = err.message.message;
 	}
 
+	if (Array.isArray(err.message)) {
+		err.message = err.message.join('. ');
+	}
+
 	if (err.message) {
 		err.message = err.message.replace(/<[^>]*>/g, '');
 	}

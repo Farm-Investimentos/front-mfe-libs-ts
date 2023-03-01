@@ -54,6 +54,18 @@ describe('ErrorBuilder', () => {
 		expect(r.message).toEqual('some error. some error');
 	});
 
+	it('Should return error for array in message', () => {
+		const r = errorBuilder({
+			response: {
+				status: 401,
+				data: {
+					message: ['a', 'b'],
+				},
+			},
+		});
+		expect(r.message).toEqual('a. b');
+	});
+
 	it('Should return error for single array', () => {
 		const r = errorBuilder({
 			response: {
