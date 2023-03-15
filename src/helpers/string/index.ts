@@ -1,3 +1,4 @@
 import capitalize from './capitalize';
+import stripTags from './stripTags';
 
-export { capitalize };
+export { capitalize, stripTags };
