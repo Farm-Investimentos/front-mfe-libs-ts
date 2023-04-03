@@ -1,4 +1,9 @@
-export default (_Vue: any, mapGetters: Function, mapActions: Function, moduleName: string) => {
+export default (
+	_Vue: any,
+	mapGetters: Function,
+	mapActions: Function,
+	moduleName: string,
+) => {
 	_Vue.mixin({
 		data() {
 			return {
@@ -24,6 +29,12 @@ export default (_Vue: any, mapGetters: Function, mapActions: Function, moduleNam
 			checkAccess() {
 				const rolesList = this.currentUserRoles;
 				let { roleKey } = this.$route.meta;
+
+				if (!roleKey.split('.')) {
+					this.updateCurrentRouteRole(0);
+					this.userHasAccess = false;
+					return;
+				}
 
 				const rolesPath = roleKey.split('.').map((item: string) => {
 					if (item.indexOf(':') === 0) {
@@ -55,9 +66,12 @@ export default (_Vue: any, mapGetters: Function, mapActions: Function, moduleNam
 					this.updateCurrentUserRoles(data.detail.message);
 					this.checkAccess();
 				});
-				window.addEventListener('CURRENT_USER_INTERNAL', (data: any) => {
-					this.updateInternalUser(data.detail.message);
-				});
+				window.addEventListener(
+					'CURRENT_USER_INTERNAL',
+					(data: any) => {
+						this.updateInternalUser(data.detail.message);
+					},
+				);
 			},
 		},
 	});
