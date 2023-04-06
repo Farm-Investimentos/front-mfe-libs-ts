@@ -30,7 +30,7 @@ export default (
 				const rolesList = this.currentUserRoles;
 				let { roleKey } = this.$route.meta;
 
-				if (!roleKey.split('.')) {
+				if (!roleKey) {
 					this.updateCurrentRouteRole(0);
 					this.userHasAccess = false;
 					return;
