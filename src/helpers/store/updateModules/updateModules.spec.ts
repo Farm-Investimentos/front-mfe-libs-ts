@@ -57,24 +57,31 @@ describe('updateModules', () => {
 		it('should add a new getter in a single module', () => {
 			const name = 'operations';
 
+			const multipliedBy100Getter = {
+				name: 'multipliedBy100',
+				fn: jest.fn((state: genericStateType) => state.count * 100),
+			};
+
+			const operationGetterAccess = `${name}/${multipliedBy100Getter.name}`;
+
 			const updates = [
 				{
 					name,
 					replaces: {
 						getters: {
-							multiplyBy100: (state: genericStateType) =>
-								state.count * 100,
+							[multipliedBy100Getter.name]:
+								multipliedBy100Getter.fn,
 						},
 					},
 				},
 			];
 
-			expect(store.getters).not.toHaveProperty(`${name}/multiplyBy100`);
+			expect(store.getters).not.toHaveProperty(operationGetterAccess);
 
 			updateModules(store, ...updates);
 
-			expect(store.getters).toHaveProperty(`${name}/multiplyBy100`);
-			expect(store.getters[`${name}/multiplyBy100`]).toEqual(
+			expect(store.getters).toHaveProperty(operationGetterAccess);
+			expect(store.getters[operationGetterAccess]).toEqual(
 				genericState.count * 100,
 			);
 		});
@@ -125,9 +132,13 @@ describe('updateModules', () => {
 			expect(store.getters).toHaveProperty(operationsGetterAccess);
 			expect(store.getters).toHaveProperty(walletGetterAccess);
 
-			expect(store.getters[operationsGetterAccess]).toEqual(100);
+			expect(store.getters[operationsGetterAccess]).toEqual(
+				genericState.count * 100,
+			);
 
-			expect(store.getters[walletGetterAccess]).toEqual(200);
+			expect(store.getters[walletGetterAccess]).toEqual(
+				genericState.count * 200,
+			);
 		});
 	});
 
