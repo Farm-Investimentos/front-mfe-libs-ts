@@ -10,7 +10,6 @@ import mutationsBuilder from './mutationsBuilder';
 import resetListBuilder from './resetListBuilder';
 import userAccess from './userAccess';
 import search from './search';
-import updateModules from './updateModules';
 
 export {
 	fetchDefaultParser,
@@ -24,6 +23,5 @@ export {
 	mutationsBuilder,
 	resetListBuilder,
 	userAccess,
-	updateModules,
 	search,
 };
