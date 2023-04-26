@@ -11,7 +11,7 @@
 		// "disableReferencedProjectLoad": true,             /* Reduce the number of projects loaded automatically by TypeScript. */
 
 		/* Language and Environment */
-		"target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+		"target": "ES2020" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
 		// "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
 		// "jsx": "preserve",                                /* Specify what JSX code is generated. */
 		// "experimentalDecorators": true,                   /* Enable experimental support for TC39 stage 2 draft decorators. */
@@ -24,9 +24,10 @@
 		// "useDefineForClassFields": true,                  /* Emit ECMAScript-standard-compliant class fields. */
 
 		/* Modules */
-		"module": "commonjs" /* Specify what module code is generated. */,
+		// Browser feature support list for ES2020: https://caniuse.com/?feats=mdn-javascript_operators_optional_chaining,mdn-javascript_operators_nullish_coalescing,mdn-javascript_builtins_globalthis,es6-module-dynamic-import,bigint,mdn-javascript_builtins_promise_allsettled,mdn-javascript_builtins_string_matchall,mdn-javascript_statements_export_namespace,mdn-javascript_operators_import_meta
+		"module": "ES2020" /* Specify what module code is generated. */,
 		"rootDir": "./src" /* Specify the root folder within your source files. */,
-		// "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
+		"moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
 		"baseUrl": "./src" /* Specify the base directory to resolve non-relative module names. */,
 		// "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
 		// "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
