@@ -1,6 +1,6 @@
 {
 	"name": "@farm-investimentos/front-mfe-libs-ts",
-	"version": "1.3.2",
+	"version": "2.0.0",
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
@@ -24,7 +24,9 @@
 		"jest": "^28.1.0",
 		"jest-environment-jsdom": "^28.1.1",
 		"ts-jest": "^28.0.2",
-		"typescript": "^4.6.4"
+		"typescript": "^4.6.4",
+		"vue": "2.7.10",
+		"vuex": "^3.6.2"
 	},
 	"dependencies": {
 		"@types/node": "^17.0.33",

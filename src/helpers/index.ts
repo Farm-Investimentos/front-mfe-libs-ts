@@ -3,6 +3,7 @@ export * from './validators';
 export * from './store';
 export * from './notify';
 export * from './string';
+export * from './tests';
 
 import file from './file';
 import queryString from './queryString';
