@@ -66,6 +66,10 @@ export default {
 		return FARM.APIS.agentesCobranca;
 	},
 
+	get apiSuperCessao(): string {
+		return FARM.APIS.superCessao;
+	},
+
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
