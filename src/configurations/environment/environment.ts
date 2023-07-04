@@ -70,6 +70,10 @@ export default {
 		return FARM.APIS.superCessao;
 	},
 
+	get apiSuperCessaoV2(): string {
+		return FARM.APIS.superCessaov2;
+	},
+
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
