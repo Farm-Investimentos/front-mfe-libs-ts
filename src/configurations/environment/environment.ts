@@ -74,6 +74,10 @@ export default {
 		return FARM.APIS.superCessaov2;
 	},
 
+	get apiFinanciamento(): string {
+		return FARM.APIS.financiamento;
+	},
+
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
