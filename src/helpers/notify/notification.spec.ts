@@ -27,7 +27,7 @@ describe('notification', () => {
 
 	it('Must have correct parameters if key is HTTP_ERROR', () => {
 		const spyObj = jest.spyOn(window, 'dispatchEvent');
-		expect(notification('HTTP_ERROR', { event: '' })).toBeTruthy();
+		expect(notification('HTTP_ERROR', { event_label: '' })).toBeTruthy();
 		expect(spyObj).toHaveBeenCalled();
 	});
 });
