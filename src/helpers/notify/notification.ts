@@ -7,16 +7,24 @@ import { StatusEnum } from '../../interfaces/IRequestStatus';
  * @param {type} - type of the event (ERROR/SUCCESS/START)
  * @param {message} - message to br broadcasted
  */
-type NotificationCustomMessage = {
-	title: string;
-	message: string;
-};
+interface INotificationMessage {
+	title: string
+	message: string
+}
 
-export default (
-	type: StatusEnum | string,
-	message?: NotificationCustomMessage | string,
+interface INotificationSpecificEvents {
+	'ANALYTICS_EVENTS': { action: string },
+}
+
+type BaseNotification = string | INotificationMessage
+
+type NotificationCategoryKeys = keyof INotificationSpecificEvents;
+
+export default <T extends string | NotificationCategoryKeys>(
+	type: T | StatusEnum | string,
+	message?: T extends NotificationCategoryKeys ? INotificationSpecificEvents[T] : BaseNotification,
 ): CustomEvent<{
-	message?: NotificationCustomMessage | string;
+	message?: T extends NotificationCategoryKeys ? INotificationSpecificEvents[T] : BaseNotification;
 }> => {
 	const customEvent = new CustomEvent(type, {
 		detail: {
