@@ -15,7 +15,7 @@ interface INotificationMessage {
 type GTagEventParams = Gtag.EventParams | Gtag.ControlParams | Gtag.CustomParams
 
 interface INotificationSpecificEvents {
-	'ANALYTICS_EVENTS': { event: Gtag.EventNames | (string & {}), payload?: GTagEventParams },
+	'ANALYTICS_EVENT': { event: Gtag.EventNames | (string & {}), payload?: GTagEventParams },
 	'HTTP_ERROR': GTagEventParams
 }
 
