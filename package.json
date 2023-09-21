@@ -1,6 +1,6 @@
 {
 	"name": "@farm-investimentos/front-mfe-libs-ts",
-	"version": "2.2.0",
+	"version": "2.3.0",
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
@@ -16,6 +16,7 @@
 	"keywords": [],
 	"types": "./types/index.d.ts",
 	"devDependencies": {
+		"@types/gtag.js": "~0.0.13",
 		"@types/jest": "^27.5.1",
 		"axios": "^0.27.2",
 		"eslint": "^8.15.0",
