@@ -19,9 +19,9 @@ describe('notification', () => {
 		expect(spyObj).toHaveBeenCalled();
 	});
 
-	it('Must have correct parameters if key is ANALYTICS_EVENTS', () => {
+	it('Must have correct parameters if key is ANALYTICS_EVENT', () => {
 		const spyObj = jest.spyOn(window, 'dispatchEvent');
-		expect(notification('ANALYTICS_EVENTS', { event: 'event', payload: { event_label: '' } })).toBeTruthy();
+		expect(notification('ANALYTICS_EVENT', { event: 'event', payload: { event_label: '' } })).toBeTruthy();
 		expect(spyObj).toHaveBeenCalled();
 	});
 
