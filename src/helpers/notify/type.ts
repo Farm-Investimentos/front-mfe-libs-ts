@@ -1,9 +1,9 @@
-export interface INotificationMessage {
+interface INotificationMessage {
 	title: string
 	message: string
 }
 
-export type GTagEventParams = Gtag.EventNames | Gtag.ControlParams | Gtag.CustomParams
+type GTagEventParams = Gtag.EventNames | Gtag.ControlParams | Gtag.CustomParams
 
 export interface INotificationSpecificEvents {
 	'ANALYTICS_EVENT': { event: Gtag.EventNames | (string & {}), payload?: GTagEventParams },
