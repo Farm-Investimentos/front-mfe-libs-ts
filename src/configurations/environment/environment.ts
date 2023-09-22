@@ -86,6 +86,10 @@ export default {
 		return FARM.APIS.restrictiveList;
 	},
 
+	get apiCreditoDecisao(): string {
+		return FARM.APIS.creditoDecisao;
+	},
+
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
