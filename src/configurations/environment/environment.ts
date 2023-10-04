@@ -90,6 +90,10 @@ export default {
 		return FARM.APIS.creditoDecisao;
 	},
 
+	get apiCompliance(): string {
+		return FARM.APIS.compliance;
+	},
+
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
