@@ -1,6 +1,6 @@
 {
 	"name": "@farm-investimentos/front-mfe-libs-ts",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
@@ -9,7 +9,7 @@
 	"scripts": {
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"build": "tsc --project tsconfig.build.json",
+		"build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix"
 	},
