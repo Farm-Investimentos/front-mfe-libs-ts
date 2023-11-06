@@ -4,7 +4,10 @@
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
-	"main": "./index.js",
+	"main": "./cjs/index.js",
+	"module": "./index.js",
+	"jsdelivr": "./cjs/index.js",
+	"unpkg": "./cjs/vuetify.js",
 	"private": false,
 	"scripts": {
 		"test": "jest",
