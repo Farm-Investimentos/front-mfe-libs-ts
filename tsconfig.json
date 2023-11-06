@@ -25,7 +25,7 @@
 
 		/* Modules */
 		// Browser feature support list for ES2020: https://caniuse.com/?feats=mdn-javascript_operators_optional_chaining,mdn-javascript_operators_nullish_coalescing,mdn-javascript_builtins_globalthis,es6-module-dynamic-import,bigint,mdn-javascript_builtins_promise_allsettled,mdn-javascript_builtins_string_matchall,mdn-javascript_statements_export_namespace,mdn-javascript_operators_import_meta
-		"module": "commonjs" /* Specify what module code is generated. */,
+		"module": "ES2020" /* Specify what module code is generated. */,
 		"rootDir": "./src" /* Specify the root folder within your source files. */,
 		"moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
 		"baseUrl": "./src" /* Specify the base directory to resolve non-relative module names. */,
