@@ -3,6 +3,9 @@ const modalableMixin = {
 		value: {
 			required: true,
 		},
+		modelValue: {
+			required: true,
+		},
 	},
 	computed: {
 		inputVal: {
@@ -11,6 +14,7 @@ const modalableMixin = {
 			},
 			set(val: any) {
 				(this as any).$emit('input', val);
+				(this as any).$emit('update:modelValue', val);
 			},
 		},
 	},
