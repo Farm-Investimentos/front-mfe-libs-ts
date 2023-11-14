@@ -1,16 +1,14 @@
 import { ref, computed, watch, Ref } from 'vue';
 
-import type { UsePageable, Pagination, usePageableProps, VuetifyTableSort, PureFilters } from './types';
-import { Split } from 'types/split';
+import type { UsePageable, Pagination, usePageableProps } from './types';
+import type { Split } from 'types/split';
 
 export function usePageable(props: usePageableProps, paginationModel: Pagination): UsePageable {
 	const canDoSearch = ref(true);
-	const lazyFilters = ref(props.lazyFilters || false);
+	const lazyApplyFilters = ref(props.lazyApplyFilters || false);
 	const pagination = ref(paginationModel);
 	const filterCurrent = ref(props.filters?.value || {});
 	const sortCurrent: Ref<usePageableProps['sort'] | null> = ref(props.sort || null);
-	const isOpenFilter = ref(false);
-	const isFilterCounter = ref(false);
 	const lowercaseSort = ref(props.lowercaseSort || false);
 
 	const page = computed(() => (pagination.value?.pageNumber || 0) + 1);
@@ -21,27 +19,36 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 	const hasAnyFilter = computed(() => hasFilter.value && Object.values(filterCurrent.value).filter(Boolean).length);
 	const hasAnySort = computed(() => hasSort.value && Object.values(sortCurrent.value!).filter(Boolean).length);
 
-	function getValidParams() {
-		return {
-			page: pagination.value.pageNumber,
-			limit: pagination.value.pageSize,
-			...(hasAnyFilter.value ? filterCurrent.value : {}),
-			...(hasAnySort.value ? sortCurrent.value : {}),
-		};
-	}
+	const validParams = computed(() => ({
+		page: pagination.value.pageNumber,
+		limit: pagination.value.pageSize,
+		...(hasAnyFilter.value ? filterCurrent.value : {}),
+		...(hasAnySort.value ? sortCurrent.value : {}),
+	}));
+
+	const queryValidParams = computed(() => {
+		const stringValues = Object.entries(validParams.value).reduce((accumulator, [key, value]) => {
+			return {
+				...accumulator,
+				[key]: String(value)
+			};
+		}, {} as Record<string, string>)
+
+		return new URLSearchParams(stringValues).toString()
+	});
 
 	function onChangePageLimit(newPageLimit: number) {
 		pagination.value.pageSize = newPageLimit;
 		pagination.value.pageNumber = 0;
 		if (canDoSearch) {
-			props.callbackFn(getValidParams);
+			props.callbackFn(validParams.value);
 		}
 	}
 
 	function onChangePage(newPage: number) {
 		pagination.value.pageNumber = newPage - 1;
 		if (canDoSearch) {
-			props.callbackFn(getValidParams);
+			props.callbackFn(validParams.value);
 		}
 	}
 
@@ -49,7 +56,7 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 		return lowercaseSort.value ? 'orderby' : 'orderBy';
 	}
 
-	function onSortTable(tableSort: Parameters<UsePageable['onSortTable']>[number]) {
+	function onSort(tableSort: Parameters<UsePageable['onSort']>[number]) {
 		if (!tableSort) {
 			throw new Error('No sort was provided.');
 		}
@@ -67,40 +74,39 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 		// @ts-expect-error
 		sortCurrent.value.order = tableSort.descending;
 		if (canDoSearch) {
-			props.callbackFn(getValidParams);
+			props.callbackFn(validParams.value);
 		}
 	}
 
-	function onApplyFilter(data: PureFilters) {
+	function onApplyFilters(data: Parameters<UsePageable['onApplyFilters']>[0], complement: Parameters<UsePageable['onApplyFilters']>[1] = true) {
+		const hasNewData = data && data.value && Object.values(data.value).filter(Boolean);
+
 		filterCurrent.value = {
-			...data,
+			...(complement ? { ...filterCurrent.value } : {}),
+			...(hasNewData ? { ...data.value } : {}),
 		};
+
 		pagination.value.pageNumber = 0;
 		if (canDoSearch) {
-			props.callbackFn(getValidParams);
+			props.callbackFn(validParams.value);
 		}
-	}
-
-	function onFiltersApplied(data: boolean) {
-		isFilterCounter.value = data;
 	}
 
 	watch(filterCurrent, () => {
+		if (lazyApplyFilters.value) return;
+
 		pagination.value.pageNumber = 0;
-		if (lazyFilters.value) return;
 		
-		props.callbackFn(getValidParams);
+		props.callbackFn(validParams.value);
 	}, { deep: true });
 
 	return {
 		page,
 		pagination,
-		isOpenFilter,
-		isFilterCounter,
+		queryValidParams: queryValidParams.value,
 		onChangePageLimit,
 		onChangePage,
-		onSortTable,
-		onApplyFilter,
-		onFiltersApplied,
+		onSort,
+		onApplyFilters
 	};
 }

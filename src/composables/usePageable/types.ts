@@ -14,15 +14,23 @@ export interface VuetifyTableSort {
 }
 
 export interface UsePageable {
+	/**
+	 * Human-readable page. Value to be used in the template (to be presentable to final user)
+	 * 
+	 * Will be always pagination.pageNumber + 1
+	 */
 	page: ComputedRef<number>;
-	pagination: any;
-	isFilterCounter: Ref<boolean>;
-	isOpenFilter: Ref<boolean>;
+	/**
+	 * All computed parameters until now in a URLSearchParams string format
+	 * 
+	 * Example: page=0&limit=10&search=abc
+	 */
+	queryValidParams: string;
+	pagination: Ref<Pagination>;
 	onChangePageLimit: (pageLimit: number) => void;
 	onChangePage: (page: number) => void;
-	onSortTable: (sort: VuetifyTableSort | `${string}_${VuetifyTableSort['descending']}`) => void;
-	onApplyFilter: Function;
-	onFiltersApplied: Function;
+	onSort: (sort: VuetifyTableSort | `${string}_${VuetifyTableSort['descending']}`) => void;
+	onApplyFilters: (data?: Ref<PureFilters>, complement?: boolean) => void;
 }
 
 export interface Sort {
@@ -39,5 +47,10 @@ export interface usePageableProps {
 	filters?: Ref<PureFilters> | ComputedRef<PureFilters>;
 	lowercaseSort?: boolean;
 	sort?: Sort | LowercasedSort;
-	lazyFilters?: boolean;
+	/**
+	 * Set to true when you want to lazy apply your filters, like apply many filters only in a click of a button
+	 * 
+	 * Use @type {UsePageable.onApplyFilters} to trigger the mutation
+	 */
+	lazyApplyFilters?: boolean;
 }
