@@ -7,3 +7,4 @@ export * from './mixins';
 
 export * from './hooks';
 export * from './composables';
+export * from './types';
