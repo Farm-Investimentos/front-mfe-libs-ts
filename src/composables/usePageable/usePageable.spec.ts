@@ -23,7 +23,6 @@ describe('usePageable', () => {
 	
 			const { page } = usePageable({
 				callbackFn: callback,
-				keyInputSearch: ''
 			}, pagination.value);
 	
 			expect(page.value).toBe(1);
@@ -35,7 +34,6 @@ describe('usePageable', () => {
 
 				const { onChangePage } = usePageable({
 					callbackFn: callback,
-					keyInputSearch: '',
 				}, pagination.value);
 	
 				const pageToGo = 5
@@ -53,7 +51,6 @@ describe('usePageable', () => {
 
 				const { page, onChangePageLimit } = usePageable({
 					callbackFn: callback,
-					keyInputSearch: '',
 				}, pagination.value);
 
 				expect(pagination.value.pageSize).toBe(10);
@@ -81,7 +78,33 @@ describe('usePageable', () => {
 	
 			const { page } = usePageable({
 				callbackFn,
-				keyInputSearch: '',
+				filters
+			}, pagination.value);
+	
+			expect(filters.value.testFilter).toBe('123');
+
+			filters.value.testFilter = '321';
+
+			await nextTick();
+
+			expect(page.value).toBe(1);
+			expect(filters.value.testFilter).toBe('321');
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				...filters.value
+			});
+		});
+
+		it('should LAZILY update arbitrary filters', async () => {
+			const callbackFn = jest.fn();
+
+			const filters = ref({
+				testFilter: '123'
+			})
+	
+			const { page } = usePageable({
+				callbackFn,
 				filters
 			}, pagination.value);
 	
@@ -107,7 +130,6 @@ describe('usePageable', () => {
 
 			const { page, onSortTable } = usePageable({
 				callbackFn,
-				keyInputSearch: '',
 				sort: {
 					order: '',
 					orderBy: ''
@@ -133,7 +155,6 @@ describe('usePageable', () => {
 
 			const { page, onSortTable } = usePageable({
 				callbackFn,
-				keyInputSearch: '',
 				sort: {
 					order: '',
 					orderBy: ''

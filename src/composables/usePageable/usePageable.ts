@@ -12,8 +12,6 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 	const isOpenFilter = ref(false);
 	const isFilterCounter = ref(false);
 	const lowercaseSort = ref(props.lowercaseSort || false);
-	const key = ref(props.keyInputSearch || 'search');
-	const quantChar = ref(props.charInputSearch || 3);
 
 	const page = computed(() => (pagination.value?.pageNumber || 0) + 1);
 
@@ -23,15 +21,12 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 	const hasAnyFilter = computed(() => hasFilter.value && Object.values(filterCurrent.value).filter(Boolean).length);
 	const hasAnySort = computed(() => hasSort.value && Object.values(sortCurrent.value!).filter(Boolean).length);
 
-	function validParams(value = '') {
-		const hasMainFilter = !!value;
-
+	function getValidParams() {
 		return {
 			page: pagination.value.pageNumber,
 			limit: pagination.value.pageSize,
 			...(hasAnyFilter.value ? filterCurrent.value : {}),
 			...(hasAnySort.value ? sortCurrent.value : {}),
-			...(hasMainFilter ? { [key.value]: value } : {}),
 		};
 	}
 
@@ -39,14 +34,14 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 		pagination.value.pageSize = newPageLimit;
 		pagination.value.pageNumber = 0;
 		if (canDoSearch) {
-			props.callbackFn(validParams());
+			props.callbackFn(getValidParams);
 		}
 	}
 
 	function onChangePage(newPage: number) {
 		pagination.value.pageNumber = newPage - 1;
 		if (canDoSearch) {
-			props.callbackFn(validParams());
+			props.callbackFn(getValidParams);
 		}
 	}
 
@@ -72,12 +67,8 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 		// @ts-expect-error
 		sortCurrent.value.order = tableSort.descending;
 		if (canDoSearch) {
-			props.callbackFn(validParams());
+			props.callbackFn(getValidParams);
 		}
-	}
-
-	function onClickMainFilter() {
-		isOpenFilter.value = !isOpenFilter.value;
 	}
 
 	function onApplyFilter(data: PureFilters) {
@@ -86,7 +77,7 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 		};
 		pagination.value.pageNumber = 0;
 		if (canDoSearch) {
-			props.callbackFn(validParams());
+			props.callbackFn(getValidParams);
 		}
 	}
 
@@ -94,19 +85,11 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 		isFilterCounter.value = data;
 	}
 
-	function onInputChangeMainFilter(value: string) {
-		if (value.length >= quantChar.value || value === '') {
-			if (canDoSearch) {
-				props.callbackFn(validParams(value));
-			}
-		}
-	}
-
 	watch(filterCurrent, () => {
 		pagination.value.pageNumber = 0;
 		if (lazyFilters.value) return;
 		
-		props.callbackFn(validParams());
+		props.callbackFn(getValidParams);
 	}, { deep: true });
 
 	return {
@@ -117,8 +100,6 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 		onChangePageLimit,
 		onChangePage,
 		onSortTable,
-		onClickMainFilter,
-		onInputChangeMainFilter,
 		onApplyFilter,
 		onFiltersApplied,
 	};

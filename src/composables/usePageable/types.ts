@@ -1,5 +1,13 @@
 import { ComputedRef, Ref } from "vue";
 
+export interface Pagination {
+	pageNumber: number;
+	pageSize: number;
+	sort: null;
+	totalElements: number;
+	totalPages: number;
+}
+
 export interface VuetifyTableSort {
 	field: string;
 	descending: 'ASC' | 'DESC';
@@ -10,11 +18,9 @@ export interface UsePageable {
 	pagination: any;
 	isFilterCounter: Ref<boolean>;
 	isOpenFilter: Ref<boolean>;
-	onChangePageLimit: Function;
-	onChangePage: Function;
+	onChangePageLimit: (pageLimit: number) => void;
+	onChangePage: (page: number) => void;
 	onSortTable: (sort: VuetifyTableSort | `${string}_${VuetifyTableSort['descending']}`) => void;
-	onClickMainFilter: Function;
-	onInputChangeMainFilter: (value: string) => void;
 	onApplyFilter: Function;
 	onFiltersApplied: Function;
 }
@@ -30,18 +36,8 @@ export interface PureFilters extends Record<string, string | number> {};
 
 export interface usePageableProps {
 	callbackFn: (filters: any) => void;
-	keyInputSearch: string;
 	filters?: Ref<PureFilters> | ComputedRef<PureFilters>;
 	lowercaseSort?: boolean;
 	sort?: Sort | LowercasedSort;
-	charInputSearch?: number;
 	lazyFilters?: boolean;
-}
-
-export interface Pagination {
-	pageNumber: number;
-	pageSize: number;
-	sort: null;
-	totalElements: number;
-	totalPages: number;
 }
