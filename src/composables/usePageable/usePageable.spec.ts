@@ -24,7 +24,7 @@ describe('usePageable', () => {
 		it('should have 1 page', () => {
 			const { page } = usePageable({
 				callbackFn,
-			}, pagination.value);
+			}, pagination);
 	
 			expect(page.value).toBe(1);
 			expect(callbackFn).not.toBeCalled();
@@ -33,7 +33,7 @@ describe('usePageable', () => {
 		it('should update page', () => {
 				const { onChangePage } = usePageable({
 					callbackFn,
-				}, pagination.value);
+				}, pagination);
 	
 				const pageToGo = 5
 	
@@ -48,7 +48,7 @@ describe('usePageable', () => {
 		it('should update page limit and set page back to 1', () => {
 				const { page, onChangePageLimit } = usePageable({
 					callbackFn,
-				}, pagination.value);
+				}, pagination);
 
 				expect(pagination.value.pageSize).toBe(10);
 	
@@ -74,7 +74,7 @@ describe('usePageable', () => {
 			const { page } = usePageable({
 				callbackFn,
 				filters
-			}, pagination.value);
+			}, pagination);
 	
 			expect(filters.value.testFilter).toBe('123');
 
@@ -91,6 +91,134 @@ describe('usePageable', () => {
 			});
 		});
 
+		it('should not have any filter at first but keep them after added', async () => {
+			const filters = ref({
+				testFilter: '123'
+			})
+	
+			const { page, onChangePage, onApplyFilters } = usePageable({
+				callbackFn,
+			}, pagination);
+
+			onChangePage(2);
+
+			expect(page.value).toBe(2);
+			expect(callbackFn).toHaveBeenCalledTimes(1);
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize
+			});
+
+			onApplyFilters(filters);
+
+			expect(page.value).toBe(1);
+			expect(callbackFn).toHaveBeenCalledTimes(2);
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				...filters.value
+			});
+
+			onChangePage(5);
+
+			expect(page.value).toBe(5);
+			expect(callbackFn).toHaveBeenCalledTimes(3);
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				...filters.value
+			});
+		});
+
+		it('should complement filters and keep them after added', async () => {
+			const filters = ref({
+				testFilter: '123'
+			})
+	
+			const { page, onChangePage, onApplyFilters } = usePageable({
+				callbackFn,
+				filters
+			}, pagination);
+
+			filters.value.testFilter = '456';
+
+			await nextTick();
+
+			expect(page.value).toBe(1);
+			expect(filters.value.testFilter).toBe('456');
+			expect(callbackFn).toHaveBeenCalledTimes(1);
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				...filters.value
+			});
+
+			const newFilters = ref({
+				search: '1'
+			})
+
+			onApplyFilters(newFilters);
+
+			expect(page.value).toBe(1);
+			expect(filters.value.testFilter).toBe('456');
+			expect(callbackFn).toHaveBeenCalledTimes(2);
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				...filters.value,
+				...newFilters.value
+			});
+
+			onChangePage(3)
+
+			expect(page.value).toBe(3);
+			expect(callbackFn).toHaveBeenCalledTimes(3);
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				...filters.value,
+				...newFilters.value
+			});
+		});
+
+		it('should replace filters when complement is false', async () => {
+			const filters = ref({
+				testFilter: '123'
+			})
+	
+			const { page, onApplyFilters } = usePageable({
+				callbackFn,
+				filters
+			}, pagination);
+
+			filters.value.testFilter = '456';
+
+			await nextTick();
+
+			expect(page.value).toBe(1);
+			expect(filters.value.testFilter).toBe('456');
+			expect(callbackFn).toHaveBeenCalledTimes(1)
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				...filters.value
+			});
+
+			const newFilters = ref({
+				search: '1'
+			})
+
+			onApplyFilters(newFilters, false);
+
+			expect(page.value).toBe(1);
+			expect(callbackFn).toHaveBeenCalledTimes(2)
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				...newFilters.value
+			});
+		});
+
 		it('should LAZILY update arbitrary filters and not update page back to 0 at first', async () => {
 			const initialPage = 4;
 			const filters = ref({
@@ -103,14 +231,14 @@ describe('usePageable', () => {
 				callbackFn,
 				filters,
 				lazyApplyFilters: true
-			}, pagination.value);
+			}, pagination);
 
 			filters.value.testFilter = '321';
 
 			await nextTick();
 
 			expect(callbackFn).not.toHaveBeenCalled();
-			expect(page.value).toBe(pagination.value.pageNumber + 1);
+			expect(page.value).toBe(initialPage + 1);
 
 			onApplyFilters()
 
@@ -139,7 +267,7 @@ describe('usePageable', () => {
 				callbackFn,
 				filters,
 				lazyApplyFilters: true
-			}, pagination.value);
+			}, pagination);
 
 			await nextTick();
 
@@ -159,20 +287,38 @@ describe('usePageable', () => {
 	});
 
 	describe('sort test', () => {
+		it('should start with a sort defined and keep it when something updates', () => {
+			const { page, onChangePage } = usePageable({
+				callbackFn,
+				sort: {
+					order: 'ASC',
+					orderBy: 'id'
+				}
+			}, pagination);
+
+			onChangePage(5);
+
+			expect(page.value).toBe(5);
+			expect(callbackFn).toHaveBeenCalledTimes(1);
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				order: 'ASC',
+				orderBy: 'id'
+			});
+		});
+
 		it('should update sort with object and set page back to 1', () => {
 			const { page, onSort } = usePageable({
 				callbackFn,
-				sort: {
-					order: '',
-					orderBy: ''
-				}
-			}, pagination.value);
+			}, pagination);
 
 			onSort({
 				field: 'id',
 				descending: 'ASC'
 			})
 
+			expect(page.value).toBe(1);
 			expect(callbackFn).toHaveBeenCalledTimes(1);
 			expect(callbackFn).toHaveBeenCalledWith({
 				page: pagination.value.pageNumber,
@@ -185,11 +331,7 @@ describe('usePageable', () => {
 		it('should update sort with splitted string and set page back to 1', () => {
 			const { page, onSort } = usePageable({
 				callbackFn,
-				sort: {
-					order: '',
-					orderBy: ''
-				}
-			}, pagination.value);
+			}, pagination);
 
 			onSort('id_ASC');
 
@@ -203,7 +345,26 @@ describe('usePageable', () => {
 			});
 		});
 
-		it.todo('should have lowercased sort values');
+		it('should have lowercased sort values', () => {
+			const { page, onSort } = usePageable({
+				callbackFn,
+				lowercaseSort: true
+			}, pagination);
+
+			onSort({
+				field: 'id',
+				descending: 'ASC'
+			});
+
+			expect(page.value).toBe(1);
+			expect(callbackFn).toHaveBeenCalledTimes(1);
+			expect(callbackFn).toHaveBeenCalledWith({
+				page: pagination.value.pageNumber,
+				limit: pagination.value.pageSize,
+				order: 'ASC',
+				orderby: 'id'
+			});
+		});
 	});
 
 	describe('utilities', () => {
@@ -215,7 +376,7 @@ describe('usePageable', () => {
 			const { queryValidParams } = usePageable({
 				callbackFn,
 				filters
-			}, pagination.value);
+			}, pagination);
 	
 			expect(queryValidParams).toEqual('page=0&limit=10&testFilter=123')
 		})

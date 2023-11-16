@@ -1,12 +1,12 @@
-import { ref, computed, watch, Ref } from 'vue';
+import { ref, unref, computed, watch, type Ref, type ComputedRef } from 'vue';
 
-import type { UsePageable, Pagination, usePageableProps } from './types';
+import type { UsePageable, Pagination, usePageableProps, Sort, LowercasedSort } from './types';
 import type { Split } from 'helpers/types/split';
 
-export function usePageable(props: usePageableProps, paginationModel: Pagination): UsePageable {
+export function usePageable(props: usePageableProps, paginationModel: Ref<Pagination> | ComputedRef<Pagination>): UsePageable {
 	const canDoSearch = ref(true);
 	const lazyApplyFilters = ref(props.lazyApplyFilters || false);
-	const pagination = ref(paginationModel);
+	const pagination = ref(unref(paginationModel));
 	const filterCurrent = ref(props.filters?.value || {});
 	const sortCurrent: Ref<usePageableProps['sort'] | null> = ref(props.sort || null);
 	const lowercaseSort = ref(props.lowercaseSort || false);
@@ -68,11 +68,12 @@ export function usePageable(props: usePageableProps, paginationModel: Pagination
 				descending: order
 			}
 		}
+
+		sortCurrent.value = {
+			order: tableSort.descending,
+			[getOrderByKey()]: tableSort.field
+		} as NonNullable<typeof sortCurrent.value>;
 		
-		// @ts-expect-error
-		sortCurrent.value[getOrderByKey()] = tableSort.field;
-		// @ts-expect-error
-		sortCurrent.value.order = tableSort.descending;
 		if (canDoSearch) {
 			props.callbackFn(validParams.value);
 		}

@@ -30,6 +30,9 @@ export interface UsePageable {
 	onChangePageLimit: (pageLimit: number) => void;
 	onChangePage: (page: number) => void;
 	onSort: (sort: VuetifyTableSort | `${string}_${VuetifyTableSort['descending']}`) => void;
+	/**
+	 * Function to apply filters lazily (ideally you want to use it when lazyApplyFilters is true)
+	 */
 	onApplyFilters: (data?: Ref<PureFilters>, complement?: boolean) => void;
 }
 
@@ -50,7 +53,7 @@ export interface usePageableProps {
 	/**
 	 * Set to true when you want to lazy apply your filters, like apply many filters only in a click of a button
 	 * 
-	 * Use @type {UsePageable.onApplyFilters} to trigger the mutation
+	 * Use @type {UsePageable['onApplyFilters']} to trigger the mutation
 	 */
 	lazyApplyFilters?: boolean;
 }
