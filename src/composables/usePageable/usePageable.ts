@@ -1,7 +1,7 @@
 import { ref, computed, watch, Ref } from 'vue';
 
 import type { UsePageable, Pagination, usePageableProps } from './types';
-import type { Split } from 'types/split';
+import type { Split } from 'helpers/types/split';
 
 export function usePageable(props: usePageableProps, paginationModel: Pagination): UsePageable {
 	const canDoSearch = ref(true);
