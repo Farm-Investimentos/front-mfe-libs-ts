@@ -1,21 +1,48 @@
-export function flatObject<T = any>(obj: any): Record<string, T> {
-	let flatObj: any = {};
-	let path: Array<any> = [];
+import type { FlattenedRecord, FlattenedRecordList } from "./types";
 
-	function dig(objDig: any) {
-		if (objDig !== Object(objDig)) {
-			return (flatObj[path.join('.')] = objDig);
+/**
+ * Flatten an object joining nested keys into string.
+ * 
+ * @example
+ * ```js
+ * const input = {
+ * 	key: {
+ * 		nestedKey: true
+ * 	},
+ * 	secondKey: {
+ * 		nestedKey: {
+ * 			deepNestedKey: 123
+ * 		}
+ * 	}
+ * }
+ * 
+ * const output = flatObject(input)
+ * 
+ * // output:
+ * {
+ * 	'key.nestedKey': true
+ * 	'secondKey.nestedKey.deepNestedKey': 123
+ * }
+ * ```
+ */
+export function flatObject<T = unknown>(obj: FlattenedRecord<T>): FlattenedRecordList<T> {
+	let flatObj: FlattenedRecordList<T> = {};
+	let path: string[] = [];
+
+	function recursiveFlattening(recordToFlatten: T | FlattenedRecordList<T>) {
+		if (recordToFlatten !== Object(recordToFlatten)) {
+			return (flatObj[path.join('.')] = recordToFlatten);
 		}
 
-		for (const key in objDig) {
-			if (Object.prototype.hasOwnProperty.call(objDig, key)) {
+		for (const key in recordToFlatten as FlattenedRecordList<T>) {
+			if (key in (recordToFlatten as FlattenedRecordList<T>)) {
 				path.push(key);
-				dig(objDig[key]);
+				recursiveFlattening((recordToFlatten as FlattenedRecordList<T>)[key]);
 				path.pop();
 			}
 		}
 	}
 
-	dig(obj);
+	recursiveFlattening(obj);
 	return flatObj;
 }

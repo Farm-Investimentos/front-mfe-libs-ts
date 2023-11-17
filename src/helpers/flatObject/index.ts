@@ -1,1 +1,3 @@
-export { flatObject } from './flatObject';
+import { flatObject } from './flatObject';
+
+export default flatObject;

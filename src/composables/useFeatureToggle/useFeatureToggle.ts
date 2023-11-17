@@ -1,9 +1,10 @@
-import type { AxiosInstance } from "axios";
-import type { FeatureRecordList } from "./types";
-import { flatObject } from "../../helpers/flatObject";
 import { ref } from "vue";
+import { flatObject } from "../../helpers/flatObject";
 
-let flatFeaturesRules = ref<ReturnType<typeof flatObject<boolean>>>({});
+import type { AxiosInstance } from "axios";
+import type { FlattenedRecordList } from "../../helpers/flatObject/types";
+
+let flatFeaturesRules = ref<FlattenedRecordList<boolean>>({});
 
 export function useFeatureToggle (client: AxiosInstance) {
   /**
@@ -13,9 +14,9 @@ export function useFeatureToggle (client: AxiosInstance) {
    * @param name - The name of the file from where you want to get features
    */
   async function loadFeatures (name: string) {
-    const { data } = await client.get<FeatureRecordList>(`/features/${name}.json`);
+    const { data } = await client.get<FlattenedRecordList<boolean>>(`/features/${name}.json`);
     
-    flatFeaturesRules.value = flatObject(data);
+    flatFeaturesRules.value = flatObject(data) as FlattenedRecordList<boolean>;
   }
 
   /**
