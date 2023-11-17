@@ -1,5 +1,3 @@
-// mock client.get (axios instance)
-
 import axios from "axios";
 import { useFeatureToggle } from "./useFeatureToggle";
 
@@ -17,11 +15,13 @@ describe('useFeatureToggle composable', () => {
   
       mockedAxios.get.mockResolvedValue({ data })
       
-      const { flatFeaturesRules, loadFeatures } = useFeatureToggle(mockedAxios);
+      const { flatFeaturesRules, loadFeatures, isFeatureEnabled } = useFeatureToggle(mockedAxios);
   
       await loadFeatures('wallet');
   
       expect(flatFeaturesRules.value).toEqual(data)
+      expect(isFeatureEnabled('testKey')).toBe(data.testKey);
+      expect(isFeatureEnabled('testKey2')).toBe(data.testKey2);
     });
   
     it('should test behavior of deep object', async () => {
