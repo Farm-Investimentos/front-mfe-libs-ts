@@ -19,7 +19,7 @@ describe('useFeatureToggle composable', () => {
   
       await loadFeatures('wallet');
   
-      expect(flatFeaturesRules.value).toEqual(data)
+      expect(flatFeaturesRules.value).toStrictEqual(data);
       expect(isFeatureEnabled('testKey')).toBe(data.testKey);
       expect(isFeatureEnabled('testKey2')).toBe(data.testKey2);
     });
@@ -38,19 +38,21 @@ describe('useFeatureToggle composable', () => {
   
       mockedAxios.get.mockResolvedValue({ data })
       
-      const { flatFeaturesRules, loadFeatures } = useFeatureToggle(mockedAxios);
+      const { flatFeaturesRules, loadFeatures, isFeatureEnabled } = useFeatureToggle(mockedAxios);
   
       await loadFeatures('wallet');
   
-      expect(flatFeaturesRules.value).toEqual({
+      expect(flatFeaturesRules.value).toStrictEqual({
         'testKey1.feature.checkForSomething': true,
         'testKey2.checkForAnotherThing': true
       })
+      expect(isFeatureEnabled('testKey1.feature.checkForSomething')).toBe(data.testKey1.feature.checkForSomething);
+      expect(isFeatureEnabled('testKey2.checkForAnotherThing')).toBe(data.testKey2.checkForAnotherThing);
     });
   })
 
-  describe('isFeatureEnabled', () => {
-    it('should return true for an absent key', async () => {
+  describe('validations', () => {
+    it('should return true for no provided key', async () => {
       const data = {
         "testKey1": {
           "feature": {
