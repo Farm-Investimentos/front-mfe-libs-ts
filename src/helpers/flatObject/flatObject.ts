@@ -1,4 +1,4 @@
-import type { FlattenedRecord, FlattenedRecordList } from "./types";
+import type { FlattenedRecordList, RecordListToFlatten, RecordToFlatten } from "./types";
 
 /**
  * Flatten an object joining nested keys into string.
@@ -25,19 +25,21 @@ import type { FlattenedRecord, FlattenedRecordList } from "./types";
  * }
  * ```
  */
-export function flatObject<T = unknown>(obj: FlattenedRecord<T>): FlattenedRecordList<T> {
+export function flatObject<T = unknown>(obj: RecordListToFlatten<T>): FlattenedRecordList<T> {
 	let flatObj: FlattenedRecordList<T> = {};
 	let path: string[] = [];
 
-	function recursiveFlattening(recordToFlatten: T | FlattenedRecordList<T>) {
-		if (recordToFlatten !== Object(recordToFlatten)) {
+	function recursiveFlattening(recordToFlatten: RecordToFlatten<T>) {
+		const isARecordListToFlatten = (value: RecordToFlatten<T>): value is RecordListToFlatten<T> => value === Object(value)
+
+		if (!isARecordListToFlatten(recordToFlatten)) {
 			return (flatObj[path.join('.')] = recordToFlatten);
 		}
 
-		for (const key in recordToFlatten as FlattenedRecordList<T>) {
-			if (key in (recordToFlatten as FlattenedRecordList<T>)) {
+		for (const key in recordToFlatten) {
+			if (key in recordToFlatten) {
 				path.push(key);
-				recursiveFlattening((recordToFlatten as FlattenedRecordList<T>)[key]);
+				recursiveFlattening(recordToFlatten[key]);
 				path.pop();
 			}
 		}

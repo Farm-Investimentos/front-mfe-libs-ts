@@ -20,7 +20,7 @@ describe('flatObject', () => {
       }
     };
 
-    expect(flatObject(data)).toStrictEqual({
+    expect(flatObject<string | boolean>(data)).toStrictEqual({
       'testKey.testKeyDeep': true,
       'testKey2.testKey2Deep': 'test'
     });
