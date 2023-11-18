@@ -14,9 +14,9 @@ export function useFeatureToggle (client: AxiosInstance) {
    * @param name - The name of the file from where you want to get features
    */
   async function loadFeatures (name: string) {
-    const { data } = await client.get<RecordListToFlatten<boolean>>(`/features/${name}.json`);
+    const { data } = await client.get<typeof flatFeaturesRules.value>(`/features/${name}.json`);
     
-    flatFeaturesRules.value = flatObject(data) as RecordListToFlatten<boolean>;
+    flatFeaturesRules.value = flatObject(data);
   }
 
   /**
