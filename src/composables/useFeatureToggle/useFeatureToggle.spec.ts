@@ -9,8 +9,8 @@ describe('useFeatureToggle composable', () => {
   describe('feature toggle object composition', () => {
     it('should test behavior of simple object', async () => {
       const data = {
-        'testKey': true,
-        'testKey2': false
+        testKey: true,
+        testKey2: false
       }
   
       mockedAxios.get.mockResolvedValue({ data })
@@ -26,13 +26,13 @@ describe('useFeatureToggle composable', () => {
   
     it('should test behavior of deep object', async () => {
       const data = {
-        "testKey1": {
-          "feature": {
-            "checkForSomething": true
+        testKey1: {
+          feature: {
+            checkForSomething: true
           }
         },
-        "testKey2": {
-          "checkForAnotherThing": true
+        testKey2: {
+          checkForAnotherThing: true
         }
       }
   
@@ -54,13 +54,13 @@ describe('useFeatureToggle composable', () => {
   describe('validations', () => {
     it('should return true for no provided key', async () => {
       const data = {
-        "testKey1": {
-          "feature": {
-            "checkForSomething": true
+        testKey1: {
+          feature: {
+            checkForSomething: true
           }
         },
-        "testKey2": {
-          "checkForAnotherThing": true
+        testKey2: {
+          checkForAnotherThing: true
         }
       }
   
@@ -75,13 +75,13 @@ describe('useFeatureToggle composable', () => {
 
     it('should return false for an invalid key', async () => {
       const data = {
-        "testKey1": {
-          "feature": {
-            "checkForSomething": true
+        testKey1: {
+          feature: {
+            checkForSomething: true
           }
         },
-        "testKey2": {
-          "checkForAnotherThing": true
+        testKey2: {
+          checkForAnotherThing: true
         }
       }
   
