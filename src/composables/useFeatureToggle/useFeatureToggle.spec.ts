@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useFeatureToggle } from "./useFeatureToggle";
 
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-
 jest.mock("axios");
 
 const featureTestKey = 'featureTestKey'
 
 describe('useFeatureToggle composable', () => {
+  let mockedAxios = axios as jest.Mocked<typeof axios>;
+
   describe('feature toggle object composition', () => {
     it('should test behavior of simple object', async () => {
       const data = {
@@ -54,7 +54,7 @@ describe('useFeatureToggle composable', () => {
   })
 
   describe('isLoading', () => {
-    it('should has loading false at first', async () => {
+    it('should have loading false at first and after request', async () => {
       const data = {
         testKey: true,
         testKey2: false
@@ -62,25 +62,32 @@ describe('useFeatureToggle composable', () => {
   
       mockedAxios.get.mockResolvedValue({ data })
       
-      const { isLoading } = useFeatureToggle(mockedAxios);
+      const { isLoading, loadFeatures } = useFeatureToggle(mockedAxios);
 
       expect(isLoading.value).toBe(false);
-    })
-
-    it('should has loading false after request', async () => {
-      const data = {
-        testKey: true,
-        testKey2: false
-      }
-  
-      mockedAxios.get.mockResolvedValue({ data })
-      
-      const { loadFeatures, isLoading } = useFeatureToggle(mockedAxios);
 
       await loadFeatures(featureTestKey);
 
       expect(isLoading.value).toBe(false);
-    })
+    });
+
+    it('should have loading false after failed request and not have any rules', async () => {
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(jest.fn);
+  
+      mockedAxios.get.mockRejectedValue(new Error('No data'))
+      
+      const { flatFeaturesRules, isLoading, loadFeatures, isFeatureEnabled } = useFeatureToggle(mockedAxios);
+
+      // Reset shared feature flags to test if they will be empty
+      flatFeaturesRules.value = {};
+
+      await loadFeatures(featureTestKey);
+
+      expect(isLoading.value).toBe(false);
+      expect(consoleSpy).toHaveBeenCalledTimes(1);
+      expect(isFeatureEnabled('testKey')).toBeFalsy();
+      expect(flatFeaturesRules.value).toStrictEqual({});
+    });
   });
 
   describe('validations', () => {

@@ -16,6 +16,7 @@ export function useFeatureToggle (client: AxiosInstance) {
    */
   async function loadFeatures (name: string) {
     isLoading.value = true
+
     try {
       const { data } = await client.get<typeof flatFeaturesRules.value>(`/features/${name}.json`);
 
