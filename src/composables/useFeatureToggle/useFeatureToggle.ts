@@ -7,6 +7,7 @@ import type { RecordListToFlatten } from "../../helpers/flatObject/types";
 let flatFeaturesRules = ref<RecordListToFlatten<boolean>>({});
 
 export function useFeatureToggle (client: AxiosInstance) {
+  const isLoading = ref(false);
   /**
    * Fetch for feature flags in /features folder, which will be there after build of `front-mfe-orquestrador`
    * or if we build `front-mfe-toogle-features`
@@ -14,9 +15,16 @@ export function useFeatureToggle (client: AxiosInstance) {
    * @param name - The name of the file from where you want to get features
    */
   async function loadFeatures (name: string) {
-    const { data } = await client.get<typeof flatFeaturesRules.value>(`/features/${name}.json`);
-    
-    flatFeaturesRules.value = flatObject(data);
+    isLoading.value = true
+    try {
+      const { data } = await client.get<typeof flatFeaturesRules.value>(`/features/${name}.json`);
+
+      flatFeaturesRules.value = flatObject(data);
+    } catch (e) {
+      console.error(`Not able to load feature flags, Error: ${e}`);
+    } finally {
+      isLoading.value = false
+    }
   }
 
   /**
@@ -32,6 +40,7 @@ export function useFeatureToggle (client: AxiosInstance) {
   }
 
   return {
+    isLoading,
     flatFeaturesRules,
     loadFeatures,
     isFeatureEnabled
