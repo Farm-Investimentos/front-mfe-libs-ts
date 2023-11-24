@@ -5,6 +5,7 @@ jest.mock("axios");
 
 const featureTestKey = 'featureTestKey'
 
+// Important: this composable share state, that's why we need to clean `flatFeaturesRules.value`
 describe('useFeatureToggle composable', () => {
   let mockedAxios = axios as jest.Mocked<typeof axios>;
 
