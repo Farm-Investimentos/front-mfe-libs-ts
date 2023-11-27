@@ -14,7 +14,7 @@ export default function useRouteRoule(
 	route: any,
 	moduleName: string,
 ) {
-	let { roleKey } = route.meta;
+	let { roleKey } = route.meta as { roleKey: string; [x: string]: string };
 	const userHasAccess = ref(true);
 
 	const currentRouteRole = computed(
@@ -27,7 +27,7 @@ export default function useRouteRoule(
 	const rolesPath = computed(() =>
 		roleKey.split('.').map((item: string) => {
 			if (item.indexOf(':') === 0) {
-				return route.params[item.split(':')[1]];
+				return route.params[item.split(':')[1]] as string;
 			}
 			return item;
 		}),
