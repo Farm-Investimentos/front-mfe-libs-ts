@@ -4,18 +4,54 @@
 
 import Vue from 'vue';
 import Vuex, { type Store } from 'vuex';
+import VueRouter from 'vue-router';
 
 import useRouteRole from '.';
-import {
-	router,
-	loadedCurrentUserRoles,
-	moduleName,
-	customEvents,
-} from './constants.spec';
 import { UPDATE_CURRENT_USER_ROLES_KEY } from './constants';
 import defaultUserAccessStore from '../../helpers/store/userAccess';
 
 Vue.use(Vuex);
+Vue.use(VueRouter);
+
+const moduleName = 'userAccess';
+
+const loadedCurrentUserRoles = { 'spec.read': 1, 'spec.write': 2 };
+
+const customEvents = {
+	CURRENT_USER_ROLES: new window.CustomEvent('CURRENT_USER_ROLES', {
+		detail: {
+			message: loadedCurrentUserRoles,
+		},
+	}),
+	CURRENT_USER_INTERNAL: new window.CustomEvent('CURRENT_USER_INTERNAL', {
+		detail: {
+			message: true,
+		},
+	}),
+};
+
+const router = new VueRouter({
+	routes: [
+		{
+			name: 'SpecNoMetaRoute',
+			path: '/no-meta',
+		},
+		{
+			name: 'SpecReadRoute',
+			path: '/spec/read',
+			meta: {
+				roleKey: 'spec.read',
+			},
+		},
+		{
+			name: 'SpecWriteRoute',
+			path: '/spec/write',
+			meta: {
+				roleKey: 'spec.write',
+			},
+		},
+	],
+});
 
 describe('routeRole', () => {
 	let store: Store<any>;
