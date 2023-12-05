@@ -1,10 +1,11 @@
 import { ref } from 'vue';
-import flatObject from '../../helpers/flatObject';
+
+import { flatObject } from '../../helpers';
 
 import type { AxiosInstance } from 'axios';
-import type { RecordListToFlatten } from '../../helpers/flatObject/types';
+import type { FlattenedRecordList } from '../../helpers/flatObject/types';
 
-let flatFeaturesRules = ref<RecordListToFlatten<boolean>>({});
+let flatFeaturesRules = ref<FlattenedRecordList<boolean>>({});
 
 export function useFeatureToggle() {
 	const isLoading = ref(false);
