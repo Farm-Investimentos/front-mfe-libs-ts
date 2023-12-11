@@ -6,7 +6,7 @@ import Vue from 'vue';
 import Vuex, { type Store } from 'vuex';
 import VueRouter from 'vue-router';
 
-import useRouteRole from '.';
+import { useRouteRole } from '.';
 import { UPDATE_CURRENT_USER_ROLES_KEY } from './constants';
 import defaultUserAccessStore from '../../helpers/store/userAccess';
 
