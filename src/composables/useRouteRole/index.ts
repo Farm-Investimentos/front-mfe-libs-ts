@@ -1,3 +1,1 @@
-import useRouteRole from './useRouteRole';
-
-export default useRouteRole;
+export { useRouteRole } from './useRouteRole';

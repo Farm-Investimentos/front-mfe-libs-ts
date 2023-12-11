@@ -12,7 +12,7 @@ import {
 	UPDATE_CURRENT_USER_ROLES_KEY,
 } from './constants';
 
-export default function useRouteRoule(
+export function useRouteRole(
 	store: Store<any>,
 	route: Route,
 	moduleName: string,
