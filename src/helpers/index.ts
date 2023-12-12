@@ -15,10 +15,12 @@ import toClipboard from './toClipboard';
 import localStorageWrapper from './localStorageWrapper';
 import cacheClient from './cacheClient';
 import axiosWrapper from './axiosWrapper';
+import flatObject from './flatObject';
 import * as types from './types';
 
 export {
 	file,
+	flatObject,
 	queryString,
 	fileSaver,
 	errorBuilder,
