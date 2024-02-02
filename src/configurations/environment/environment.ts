@@ -1,4 +1,5 @@
 import ICognitoConfig from 'interfaces/ICognitoConfig';
+import IIdwallConfig from 'interfaces/IIdwallConfig';
 
 const _window: any = window;
 const FARM = _window['FARM'] || {};
@@ -105,6 +106,15 @@ export default {
 		return {
 			userPoolId: FARM.COGNITO.USERPOOL_ID,
 			clientId: FARM.COGNITO.CLIENT_ID,
+		};
+	},
+	get idwall(): IIdwallConfig {
+		return {
+			matriz: FARM.IDWALL.MATRIZ,
+			token: FARM.IDWALL.TOKEN,
+			urlReports: FARM.IDWALL.URL_REPORTS,
+			authorization: FARM.IDWALL.AUTHORIZATION,
+			urlSdkWeb: FARM.IDWALL.URL_SDK_WEB
 		};
 	},
 };
