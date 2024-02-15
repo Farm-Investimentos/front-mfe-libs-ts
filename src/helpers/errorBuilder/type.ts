@@ -4,3 +4,7 @@ export type ErrorType = {
 	message: string;
 	httpStatus: string;
 };
+
+export type ErrorBuilderOptions = {
+	separator?: string;
+};
