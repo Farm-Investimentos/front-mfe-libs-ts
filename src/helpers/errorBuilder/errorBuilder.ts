@@ -7,9 +7,14 @@
  */
 
 import { IRequestStatus } from 'interfaces';
-import { ErrorType } from './type';
+import type { ErrorBuilderOptions, ErrorType } from './type';
 
-export default (error: Record<string, any>) => {
+const errorBuilderOptions = { separator: '. ' };
+
+export default (
+	error: Record<string, any>,
+	options: ErrorBuilderOptions = errorBuilderOptions,
+) => {
 	const err: Record<string, any> | IRequestStatus = {
 		type: 'ERROR',
 	};
@@ -42,7 +47,7 @@ export default (error: Record<string, any>) => {
 						if (item.defaultMessage) return item.defaultMessage;
 						return item;
 					})
-					.join('. ');
+					.join(options.separator);
 			}
 		}
 	}
@@ -52,7 +57,7 @@ export default (error: Record<string, any>) => {
 	}
 
 	if (Array.isArray(err.message)) {
-		err.message = err.message.join('. ');
+		err.message = err.message.join(options.separator);
 	}
 
 	if (err.message) {
