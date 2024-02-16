@@ -78,6 +78,74 @@ describe('ErrorBuilder', () => {
 		expect(r.message).toEqual('some error');
 	});
 
+	it('Should return default message for empty array value', () => {
+		const errors = ['some error', '', 'dasdas'];
+
+		const r = errorBuilder({
+			response: {
+				status: 401,
+				data: {
+					errors,
+				},
+			},
+		});
+		expect(r.message).toEqual('some error. Erro inesperado. dasdas');
+	});
+
+	it('Should return error for multiple array length', () => {
+		const errors = ['some error', 'dasdas'];
+
+		const r = errorBuilder({
+			response: {
+				status: 401,
+				data: {
+					errors,
+				},
+			},
+		});
+		expect(r.message).toEqual(errors.join('. '));
+	});
+
+	it('Should return error for multiple array length with object', () => {
+		const errors = [
+			{ defaultMessage: 'some error' },
+			{ defaultMessage: 'dasdas' },
+		];
+
+		const r = errorBuilder({
+			response: {
+				status: 401,
+				data: {
+					errors,
+				},
+			},
+		});
+		expect(r.message).toEqual(
+			errors.map((v) => v.defaultMessage).join('. '),
+		);
+	});
+
+	it('Should separate by a different character when options are used', () => {
+		const options = {
+			separator: ', ',
+		};
+
+		const errors = ['some error', 'dasdas'];
+
+		const r = errorBuilder(
+			{
+				response: {
+					status: 401,
+					data: {
+						errors,
+					},
+				},
+			},
+			options,
+		);
+		expect(r.message).toEqual(errors.join(options.separator));
+	});
+
 	it('Should remove html markup', () => {
 		const r = errorBuilder({
 			response: {
