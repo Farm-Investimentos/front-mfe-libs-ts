@@ -1,9 +1,8 @@
 interface IIdwallConfig {
-    matriz: string,
     token: string,
-    urlReports: string,
     authorization: string,
-    urlSdkWeb: string
+    sdkweb: string,
+    flowId: string,
 }
 
 export default IIdwallConfig;
