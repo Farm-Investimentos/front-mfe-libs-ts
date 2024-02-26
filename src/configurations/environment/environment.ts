@@ -110,11 +110,10 @@ export default {
 	},
 	get idwall(): IIdwallConfig {
 		return {
-			matriz: FARM.IDWALL.MATRIZ,
-			token: FARM.IDWALL.TOKEN,
-			urlReports: FARM.IDWALL.URL_REPORTS,
-			authorization: FARM.IDWALL.AUTHORIZATION,
-			urlSdkWeb: FARM.IDWALL.URL_SDK_WEB
+			token: FARM.IDWALL.token,
+			authorization: FARM.IDWALL.authorization,
+			sdkweb: FARM.IDWALL.sdkweb,
+			flowId: FARM.IDWALL.flowId
 		};
 	},
 };
