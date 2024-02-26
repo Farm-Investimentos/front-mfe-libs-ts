@@ -67,10 +67,6 @@ export default {
 		return FARM.APIS.agentesCobranca;
 	},
 
-	get apiExtNovagne(): string {
-		return FARM.APIS.extNovagne;
-	},
-
 	get apiSuperCessao(): string {
 		return FARM.APIS.superCessao;
 	},
