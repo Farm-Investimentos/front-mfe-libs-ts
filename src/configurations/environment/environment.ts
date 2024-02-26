@@ -98,6 +98,11 @@ export default {
 	get apiBlipKey(): string {
 		return FARM.BLIP;
 	},
+
+	get apiIdwall(): string {
+		return FARM.APIS.idwall;
+	},
+
 	get analyticsId(): string {
 		return FARM.GA_ID;
 	},
