@@ -12,19 +12,15 @@ describe('exportHandler', () => {
 		jest.useRealTimers();
 	});
 
-	it('should have methods', () => {
-		expect(exportHandler.methods).toBeDefined();
-	});
-
-	it('should have exportHandler method', () => {
-		expect(exportHandler.methods.exportHandler).toBeDefined();
+	it('should be defined', () => {
+		expect(exportHandler).toBeDefined();
 	});
 
 	it('should have been called window.dispatchEvent and callback after exportHandler call', () => {
 		const callback = jest.fn();
 		const windowSpy = jest.spyOn(window, 'dispatchEvent');
 
-		exportHandler.methods.exportHandler(callback);
+		exportHandler(callback);
 
 		jest.runAllTimers();
 
