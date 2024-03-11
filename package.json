@@ -29,6 +29,7 @@
 		"ts-jest": "^28.0.2",
 		"typescript": "^4.6.4",
 		"vue": "2.7.10",
+		"vue-router": "^3.6.5",
 		"vuex": "^3.6.2"
 	},
 	"dependencies": {
