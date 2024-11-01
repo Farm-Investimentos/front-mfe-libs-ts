@@ -16,6 +16,7 @@ import localStorageWrapper from './localStorageWrapper';
 import cacheClient from './cacheClient';
 import axiosWrapper from './axiosWrapper';
 import flatObject from './flatObject';
+import exportHandler from './exportHandler';
 import * as types from './types';
 
 export {
@@ -29,6 +30,7 @@ export {
 	toClipboard,
 	localStorageWrapper,
 	axiosWrapper,
+	exportHandler as exportHandlerHelper,
 	cacheClient,
-	types
+	types,
 };
