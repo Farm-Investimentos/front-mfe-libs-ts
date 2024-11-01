@@ -121,4 +121,7 @@ export default {
 			flowId: FARM.IDWALL.flowId
 		};
 	},
+	get apiElegibilidadeUrl() {
+		return FARM.APIS.elegibilidade;
+	},
 };
