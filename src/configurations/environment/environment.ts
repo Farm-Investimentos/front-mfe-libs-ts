@@ -121,6 +121,6 @@ export default {
 	},
 
 	get apiSecurityIntegrationUrl() {
-		return v;
+		return FARM.APIS.securityIntegrationUrl;
 	},
 };
