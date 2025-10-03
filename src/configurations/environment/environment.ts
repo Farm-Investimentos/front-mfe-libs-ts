@@ -50,7 +50,6 @@ export default {
 	get apiSegurancaUrl(): string {
 		return FARM.APIS.seguranca;
 	},
-
 	get apiDesembolsosUrl(): string {
 		return FARM.APIS.desembolsos;
 	},
@@ -119,5 +118,9 @@ export default {
 	},
 	get apiElegibilidadeUrl() {
 		return FARM.APIS.elegibilidade;
+	},
+
+	get apiSecurityIntegrationUrl() {
+		return FARM.APIS.securityIntegrationUrl;
 	},
 };

@@ -1,6 +1,6 @@
 {
 	"name": "@farm-investimentos/front-mfe-libs-ts",
-	"version": "3.3.3",
+	"version": "3.4.0",
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
@@ -26,11 +26,24 @@
 		"husky": "^8.0.1",
 		"jest": "^28.1.0",
 		"jest-environment-jsdom": "^28.1.1",
+		"pinia": "^2.1.7",
 		"ts-jest": "^28.0.2",
 		"typescript": "^4.6.4",
 		"vue": "2.7.10",
 		"vue-router": "^3.6.5",
 		"vuex": "^3.6.2"
+	},
+	"peerDependencies": {
+		"pinia": "^2.0.0",
+		"vuex": "^3.0.0 || ^4.0.0"
+	},
+	"peerDependenciesMeta": {
+		"pinia": {
+			"optional": true
+		},
+		"vuex": {
+			"optional": true
+		}
 	},
 	"dependencies": {
 		"@types/gtag.js": "~0.0.13",
