@@ -74,6 +74,10 @@ export default {
 		return FARM.APIS.superCessaov2;
 	},
 
+	get apiReceivableBank(): string {
+		return FARM.APIS.receivableBank;
+	},
+
 	get apiFinanciamento(): string {
 		return FARM.APIS.financiamento;
 	},
