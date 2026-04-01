@@ -9,6 +9,10 @@ describe('CPF or CNPJ valid', () => {
 		expect(cpfOrCnpjRules('34641369000109')).toBeFalsy();
 	});
 
+	it('Should validate alphanumeric CNPJ', () => {
+		expect(cpfOrCnpjRules('12ABC34501DE35')).toBeTruthy();
+	});
+
 	it('Should validate CPF', () => {
 		expect(cpfOrCnpjRules('99713313062')).toBeTruthy();
 	});
