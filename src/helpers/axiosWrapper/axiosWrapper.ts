@@ -1,6 +1,6 @@
 import {
 	AxiosError,
-	AxiosRequestConfig,
+	InternalAxiosRequestConfig,
 	AxiosResponse,
 	AxiosStatic,
 } from 'axios';
@@ -17,7 +17,7 @@ import {
  * @return {Object} axios client ready for use
  */
 export default (httpClient: any, notification: Function, baseURL: string) => {
-	const fullfilledRequest = (config: AxiosRequestConfig) => {
+	const fullfilledRequest = (config: InternalAxiosRequestConfig) => {
 		notification('LOADING_START');
 		const token = localStorage.getItem('Token');
 		if (config.headers !== undefined) {
