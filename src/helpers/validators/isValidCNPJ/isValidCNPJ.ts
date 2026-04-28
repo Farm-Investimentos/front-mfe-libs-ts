@@ -5,76 +5,50 @@
  * @returns {boolean} valid or not
  */
 
+const CNPJ_LENGTH = 14;
+const CNPJ_BASE_LENGTH = 12;
+const CNPJ_MASK_CHARS = /[./-]/g;
+const CNPJ_INVALID_CHARS = /[^a-zA-Z0-9./-]/;
+const CNPJ_UNMASKED_PATTERN = /^[A-Z0-9]{12}\d{2}$/;
+const CNPJ_REPEATED_CHARS = /^([A-Z0-9])\1{13}$/;
+const FIRST_DV_WEIGHTS = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+const SECOND_DV_WEIGHTS = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+const normalizeCNPJ = (cnpj: string): string => cnpj.replace(CNPJ_MASK_CHARS, '').toUpperCase();
+
+const getCharacterValue = (char: string): number => char.charCodeAt(0) - '0'.charCodeAt(0);
+
+const calculateDV = (value: string, weights: number[]): number => {
+	const total = value
+		.split('')
+		.reduce((sum, char, index) => sum + getCharacterValue(char) * weights[index], 0);
+	const remainder = total % 11;
+
+	return remainder < 2 ? 0 : 11 - remainder;
+};
+
 export default (cnpj: string): boolean => {
-	if (cnpj.length === 14) {
-		const cnpjsArray = cnpj.split('');
-
-		let v1 = 0;
-		let v2 = 0;
-		let aux = false;
-
-		for (let i = 1; cnpjsArray.length > i; i += 1) {
-			if (cnpjsArray[i - 1] !== cnpjsArray[i]) {
-				aux = true;
-			}
-		}
-
-		if (aux === false) {
-			return false;
-		}
-
-		for (
-			let i = 0, p1 = 5, p2 = 13;
-			cnpjsArray.length - 2 > i;
-			i += 1, p1 -= 1, p2 -= 1
-		) {
-			if (p1 >= 2) {
-				v1 += +cnpjsArray[i] * p1;
-			} else {
-				v1 += +cnpjsArray[i] * p2;
-			}
-		}
-
-		v1 %= 11;
-
-		if (v1 < 2) {
-			v1 = 0;
-		} else {
-			v1 = 11 - v1;
-		}
-
-		const valor1 = parseInt(cnpjsArray[12], 10);
-
-		if (v1 !== valor1) {
-			return false;
-		}
-
-		for (
-			let i = 0, p1 = 6, p2 = 14;
-			cnpjsArray.length - 1 > i;
-			i += 1, p1 -= 1, p2 -= 1
-		) {
-			if (p1 >= 2) {
-				v2 += +cnpjsArray[i] * p1;
-			} else {
-				v2 += +cnpjsArray[i] * p2;
-			}
-		}
-
-		v2 %= 11;
-
-		if (v2 < 2) {
-			v2 = 0;
-		} else {
-			v2 = 11 - v2;
-		}
-
-		const valor2 = parseInt(cnpjsArray[13], 10);
-
-		if (v2 !== valor2) {
-			return false;
-		}
-		return true;
+	if (!cnpj || CNPJ_INVALID_CHARS.test(cnpj)) {
+		return false;
 	}
-	return false;
+
+	const normalizedCNPJ = normalizeCNPJ(cnpj);
+
+	if (normalizedCNPJ.length !== CNPJ_LENGTH) {
+		return false;
+	}
+
+	if (!CNPJ_UNMASKED_PATTERN.test(normalizedCNPJ)) {
+		return false;
+	}
+
+	if (CNPJ_REPEATED_CHARS.test(normalizedCNPJ)) {
+		return false;
+	}
+
+	const cnpjBase = normalizedCNPJ.substring(0, CNPJ_BASE_LENGTH);
+	const firstDV = calculateDV(cnpjBase, FIRST_DV_WEIGHTS);
+	const secondDV = calculateDV(`${cnpjBase}${firstDV}`, SECOND_DV_WEIGHTS);
+
+	return normalizedCNPJ.endsWith(`${firstDV}${secondDV}`);
 };

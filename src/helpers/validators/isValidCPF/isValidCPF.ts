@@ -5,9 +5,15 @@
  * @returns {boolean} valid or not
  */
 
+const CPF_MASK_CHARS = /[.-]/g;
+
 export default (cpf: string): boolean => {
-	if (cpf.length === 11) {
-		const cpfArray = cpf.split('');
+	if (!cpf) return false;
+
+	const normalizedCPF = cpf.replace(CPF_MASK_CHARS, '');
+
+	if (normalizedCPF.length === 11) {
+		const cpfArray = normalizedCPF.split('');
 
 		let v1 = 0;
 		let v2 = 0;

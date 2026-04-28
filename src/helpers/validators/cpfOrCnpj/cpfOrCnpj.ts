@@ -6,6 +6,6 @@
  */
 export default (value: string): boolean => {
 	const pattern =
-		/(^\d{3}\.\d{3}\.\d{3}-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$)/;
+		/(^\d{3}\.\d{3}\.\d{3}-\d{2}$)|(^[A-Z0-9]{2}\.[A-Z0-9]{3}\.[A-Z0-9]{3}\/[A-Z0-9]{4}-\d{2}$)/i;
 	return pattern.test(value) || false;
 };
