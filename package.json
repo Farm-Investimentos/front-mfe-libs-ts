@@ -1,6 +1,6 @@
 {
 	"name": "@farm-investimentos/front-mfe-libs-ts",
-	"version": "4.2.1",
+	"version": "4.2.2",
 	"author": "farm investimentos",
 	"description": "",
 	"license": "ISC",
@@ -34,13 +34,10 @@
 		"vuex": "^3.6.2"
 	},
 	"peerDependencies": {
-		"pinia": "^2.0.0",
+		"pinia": "^2.0.0 || ^3.0.0",
 		"vuex": "^3.0.0 || ^4.0.0"
 	},
 	"peerDependenciesMeta": {
-		"pinia": {
-			"optional": true
-		},
 		"vuex": {
 			"optional": true
 		}
