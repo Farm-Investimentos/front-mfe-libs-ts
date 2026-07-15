@@ -106,6 +106,10 @@ export default {
 		return FARM.GA_ID;
 	},
 
+	get apiRelatoriosUrl() : string{
+		return FARM.APIS.relatorios;
+	},
+
 	get cognito(): ICognitoConfig {
 		return {
 			userPoolId: FARM.COGNITO.USERPOOL_ID,
