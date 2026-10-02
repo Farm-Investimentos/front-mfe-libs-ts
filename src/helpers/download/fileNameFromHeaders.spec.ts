@@ -24,4 +24,28 @@ describe('fileNameFromHeaders', () => {
 
 		expect(fileNameFromHeaders(headers, 'fallback.xlsx')).toBe('fallback.xlsx');
 	});
+
+	it('prioriza filename* quando filename e filename* estão presentes', () => {
+		const headers = {
+			'content-disposition':
+				'attachment; filename="relatorio.xlsx"; filename*=UTF-8\'\'relat%C3%B3rio.xlsx',
+		};
+
+		expect(fileNameFromHeaders(headers, 'fallback.xlsx')).toBe('relatório.xlsx');
+	});
+
+	it('usa filename literal, sem decodificar, quando só filename está presente', () => {
+		const headers = { 'content-disposition': 'attachment; filename="relatorio-100%.xlsx"' };
+
+		expect(fileNameFromHeaders(headers, 'fallback.xlsx')).toBe('relatorio-100%.xlsx');
+	});
+
+	it('cai pra filename quando filename* tem codificação inválida', () => {
+		const headers = {
+			'content-disposition':
+				'attachment; filename="relatorio.xlsx"; filename*=UTF-8\'\'relat%rio.xlsx',
+		};
+
+		expect(fileNameFromHeaders(headers, 'fallback.xlsx')).toBe('relatorio.xlsx');
+	});
 });
