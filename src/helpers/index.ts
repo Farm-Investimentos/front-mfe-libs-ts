@@ -4,6 +4,7 @@ export * from './store';
 export * from './notify';
 export * from './string';
 export * from './tests';
+export * from './download';
 
 import file from './file';
 import queryString from './queryString';
