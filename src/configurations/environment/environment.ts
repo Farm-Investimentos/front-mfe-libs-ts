@@ -25,6 +25,9 @@ export default {
 	get onboardingApiUrl(): string {
 		return FARM.APIS.onboarding;
 	},
+	get onboardingProdutorApiUrl(): string {
+		return FARM.APIS.onboardingProdutor;
+	},
 	get apiCadastrosUrlV2(): string {
 		return FARM.APIS.cadastrosV2;
 	},
