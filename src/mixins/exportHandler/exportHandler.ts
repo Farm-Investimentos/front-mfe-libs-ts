@@ -1,3 +1,8 @@
+/**
+ * @deprecated Mesmo motivo do helpers/exportHandler: existia só para dar tempo do
+ * downloadFileHandler abrir a nova aba. Use downloadFileWithAuth (helpers/download)
+ * diretamente no service do MFE; não precisa de aviso nem delay artificial.
+ */
 const exportHandler = {
 	methods: {
 		async exportHandler(callback: Function) {
