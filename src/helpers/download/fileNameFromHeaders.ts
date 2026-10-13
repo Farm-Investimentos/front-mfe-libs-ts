@@ -11,6 +11,16 @@ export function fileNameFromHeaders(
 	fallback: string
 ): string {
 	const disposition = headers?.['content-disposition'] || '';
-	const match = disposition.match(/filename\*?=(?:UTF-8'')?"?([^";]+)"?/i);
-	return match ? decodeURIComponent(match[1]) : fallback;
+	const extendedMatch = disposition.match(/filename\*=(?:UTF-8'')?"?([^";]+)"?/i);
+	const simpleMatch = disposition.match(/filename=(?:UTF-8'')?"?([^";]+)"?/i);
+
+	if (extendedMatch) {
+		try {
+			return decodeURIComponent(extendedMatch[1]);
+		} catch {
+			return simpleMatch ? simpleMatch[1] : fallback;
+		}
+	}
+
+	return simpleMatch ? simpleMatch[1] : fallback;
 }
